@@ -1,0 +1,20 @@
+{
+  "name": "JCL review",
+  "short_name": "JCL review",
+  "id": "./",
+  "description": "Professional JCL interview revision and mainframe study notes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F5F0",
+  "theme_color": "#3B6E5C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
