@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jcl-review-v1';
+const CACHE_NAME = 'jcl-review-v3';
 const APP_SHELL = ['./','./index.html','./manifest.webmanifest','./icon.svg'];
 
 self.addEventListener('install', event => {
@@ -13,13 +13,19 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-  event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-      const copy = response.clone();
-      if (new URL(event.request.url).origin === self.location.origin) {
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+  event.respondWith((async () => {
+    const requestUrl = new URL(event.request.url);
+    const isNavigation = event.request.mode === 'navigate' || requestUrl.pathname.endsWith('/index.html');
+    try {
+      const response = await fetch(event.request);
+      if (requestUrl.origin === self.location.origin) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(event.request, response.clone());
       }
       return response;
-    }).catch(() => caches.match('./index.html')))
-  );
+    } catch (error) {
+      const cached = await caches.match(event.request);
+      return cached || (isNavigation ? caches.match('./index.html') : Response.error());
+    }
+  })());
 });
