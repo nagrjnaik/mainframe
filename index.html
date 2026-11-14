@@ -58,6 +58,77 @@
   </script>
 <style>
     /* PROFESSIONAL STUDY-APP LAYOUT */
+    /* 5-Q MOCK — COMPACT SENIOR PANEL LAYOUT */
+    #module-mock{font-size:14px}
+    #module-mock > .bg-paper-surface.border.rounded-3xl{
+      background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;
+    }
+    #module-mock > .bg-paper-surface.border.rounded-3xl > div:first-child{
+      margin-bottom:.5rem;
+    }
+    #module-mock > .bg-paper-surface.border.rounded-3xl h2{
+      font-size:1.35rem!important;line-height:1.35!important;margin-top:.25rem;
+    }
+    #module-mock > .bg-paper-surface.border.rounded-3xl p{
+      font-size:.82rem!important;line-height:1.6!important;max-width:52rem;
+    }
+    #module-mock > .space-y-5{display:block}
+    #module-mock > .space-y-5 > article{
+      background:var(--bg-surface)!important;
+      border:0!important;
+      border-top:1px solid var(--border-subtle)!important;
+      border-radius:0!important;
+      padding:1.05rem .15rem 1.15rem!important;
+      box-shadow:none!important;
+      margin:0!important;
+    }
+    #module-mock > .space-y-5 > article:first-child{border-top:1px solid var(--border-subtle)}
+    #module-mock > .space-y-5 > article > .flex.items-center.justify-between{
+      margin-bottom:.35rem;
+    }
+    #module-mock > .space-y-5 > article > .flex.items-center.justify-between > span:first-child{
+      font-size:.68rem!important;letter-spacing:.075em;line-height:1.35;font-weight:700;
+    }
+    #module-mock > .space-y-5 > article > .flex.items-center.justify-between > span:last-child{
+      font-size:.68rem!important;line-height:1.3;
+    }
+    #module-mock > .space-y-5 > article h3{
+      font-size:1rem!important;line-height:1.55!important;font-weight:650!important;margin:0!important;
+    }
+    #module-mock > .space-y-5 > article .vr-anchor{
+      margin:.7rem 0!important;padding:.55rem .7rem!important;
+      background:transparent!important;border-left:2px solid var(--accent-warm)!important;
+      border-radius:0!important;font-size:.74rem!important;line-height:1.55!important;
+    }
+    #module-mock > .space-y-5 > article textarea{
+      min-height:38px!important;height:38px!important;resize:vertical;
+      padding:.55rem .7rem!important;border-radius:10px!important;
+      font-size:.72rem!important;line-height:1.4!important;
+      margin:.25rem 0 .45rem!important;
+    }
+    #module-mock > .space-y-5 > article > div > button,
+    #module-mock > .space-y-5 > article button[onclick*="toggleScenarioDetail"]{
+      font-size:.72rem!important;padding:.45rem .75rem!important;border-radius:999px!important;
+    }
+    #module-mock > .space-y-5 > article [id^="mock-ans-"]{
+      margin-top:.7rem!important;padding-top:.7rem!important;
+      font-size:.76rem!important;line-height:1.6!important;
+    }
+    #module-mock > .space-y-5 > article [id^="mock-ans-"] p,
+    #module-mock > .space-y-5 > article [id^="mock-ans-"] li{
+      font-size:.76rem!important;line-height:1.6!important;
+    }
+    #module-mock .jcl-pre-wrapper{
+      padding:.75rem!important;border-radius:12px!important;margin-bottom:.65rem;
+    }
+    #module-mock pre{font-size:.68rem!important;line-height:1.6!important}
+    @media(max-width:767px){
+      #module-mock > .space-y-5 > article{padding:.9rem 0 1rem!important}
+      #module-mock > .space-y-5 > article h3{font-size:.92rem!important;line-height:1.55!important}
+      #module-mock > .space-y-5 > article > .flex.items-center.justify-between{align-items:flex-start}
+      #module-mock > .space-y-5 > article > .flex.items-center.justify-between > span:last-child{max-width:42%;text-align:right}
+    }
+
     .note-cat-btn{line-height:1.2}.senior-notes{margin-top:0}.senior-notes summary{min-height:44px}
     :root{--ui-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;--reading-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
     html[data-font="sans"]{--reading-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif} html[data-font="serif"]{--reading-font:'Literata',Georgia,serif} html[data-font="lexend"]{--reading-font:'Lexend',system-ui,sans-serif}
@@ -634,7 +705,7 @@
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — JES2 / JOB lifecycle</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: TYPRUN=SCAN validates JCL through the converter; it does not execute the job or perform all interpreter-time validation. Also remember JES conversion errors (IEFC*) and interpreter/allocation errors (IEF*) are different diagnostic layers.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//CHKJCL  JOB ("ACCT"),CLASS=A,MSGCLASS=X,TYPRUN=SCAN
 //STEP1   EXEC PGM=IEFBR14</pre></div></div></details></div></article>
 <!-- CHUNK 2: JOB & EXEC Statement Deep Dive -->
-<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
+<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="core"">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-2')">
 <div class="flex items-center gap-3">
 <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">02</span>
@@ -711,7 +782,7 @@
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — JOB &amp; EXEC</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: JOB-level and EXEC-level parameters have different scope. A JOB-level TIME/REGION can establish job-wide limits, while EXEC can specify step-level values; installation exits and system limits can still constrain the effective value. For parameter passing, PARM is limited in length; use PARMDD/SYSIN when the interface requires more data.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG,PARM="RUN=FULL"
 //SYSOUT   DD SYSOUT=*</pre></div></div></details></div></article>
 <!-- CHUNK 3: Conditional Processing (COND vs IF/THEN/ELSE/ENDIF) -->
-<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
+<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="core"">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-3')">
 <div class="flex items-center gap-3">
 <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">03</span>
@@ -758,7 +829,7 @@
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — COND / IF</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Important distinction: IF/THEN/ELSE is positive logic (TRUE selects THEN), while COND is a bypass test (TRUE causes the step to be bypassed). IBM also documents that IF structures normally do not execute their contained steps after an abend unless ABEND/ABENDCC/¬ABEND is referenced or an appropriate COND condition is used.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=PGMA
 //STEP2 EXEC PGM=PGMB,COND=(4,LT,STEP1)</pre></div></div></details></div></article>
 <!-- CHUNK 4: DD Statement, DISP, Storage, BLKSIZE=0 & Concatenation -->
-<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
+<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="core"">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-4')">
 <div class="flex items-center gap-3">
 <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">04</span>
@@ -819,7 +890,7 @@
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — DD / DISP / SPACE</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: DISP controls the dataset disposition, not the volume disposition. Also be precise with defaults: DISP=OLD and DISP=SHR both imply KEEP on normal and abnormal termination, but their status values remain OLD and SHR respectively.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//OUT DD DSN=USER.REPORT,DISP=(NEW,CATLG,DELETE),
 //       SPACE=(CYL,(5,2),RLSE),UNIT=SYSDA</pre></div></div></details></div></article>
 <!-- CHUNK 5: Procedures, Overrides & Library Precedence -->
-<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
+<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="core"">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-5')">
 <div class="flex items-center gap-3">
 <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">05</span>
@@ -2965,7 +3036,7 @@
 
       document.querySelectorAll('.note-cat-btn').forEach(btn => {
         const active = btn.getAttribute('data-notecat') === cat;
-        btn.className = `note-cat-btn px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
+        btn.className = `note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
           active
             ? 'bg-blue-600 text-white dark:bg-amber-500 dark:text-slate-950'
             : 'bg-paper-subtle dark:bg-slate-800 text-paper-muted dark:text-terminal-muted hover:bg-slate-200'
