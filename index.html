@@ -58,6 +58,7 @@
   </script>
 <style>
     /* PROFESSIONAL STUDY-APP LAYOUT */
+    .note-cat-btn{line-height:1.2}.senior-notes{margin-top:0}.senior-notes summary{min-height:44px}
     :root{--ui-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;--reading-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
     html[data-font="sans"]{--reading-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif} html[data-font="serif"]{--reading-font:'Literata',Georgia,serif} html[data-font="lexend"]{--reading-font:'Lexend',system-ui,sans-serif}
     body,button,input,select,textarea{font-family:var(--reading-font)} h1,h2,h3,h4,h5,h6,.font-heading{font-family:var(--ui-font)!important} code,pre,.jcl-code,.font-mono{font-family:'Fira Code',ui-monospace,SFMono-Regular,Menlo,monospace!important}
@@ -452,7 +453,9 @@
 <div class="space-y-2 pt-2.5 border-t border-paper-border">
 <span class="font-semibold text-paper-muted uppercase tracking-wider text-[10px] block">5. Install</span>
 <div class="flex justify-end">
-<button aria-label="Install JCL review" class="inline-flex items-center justify-center p-2 rounded-xl border border-paper-border bg-paper-subtle text-paper-text hover:opacity-80 transition cursor-pointer" id="pwaInstallActionBtn" onclick="triggerPhoneAppInstall()" title="Install JCL review"><svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"></path></svg></button>
+<button aria-label="Install JCL review" title="Install JCL review" class="inline-flex items-center justify-center w-9 h-9 rounded-xl border border-paper-border bg-paper-subtle text-paper-text hover:opacity-80 transition cursor-pointer" id="pwaInstallActionBtn" onclick="triggerPhoneAppInstall()">
+<svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M12 6v7m0 0-2.5-2.5M12 13l2.5-2.5M10 18h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 </div>
 </div>
 <!-- 6. About & Developer Attribution -->
@@ -488,7 +491,7 @@
 <p class="text-xs text-paper-muted mt-1.5 px-1 hidden" aria-live="polite" id="searchStatusText" role="status"></p>
 </div>
 <!-- Desktop Segmented Navigation Bar -->
-<details class="mt-3 border-t border-paper-border pt-3 group" id="studyModuleMenu"><summary class="list-none cursor-pointer flex items-center justify-between gap-3 rounded-2xl bg-paper-subtle px-4 py-2.5 text-sm font-semibold"><span class="flex items-center gap-2"><span>▦</span><span>Study modules</span><span class="text-[11px] font-normal text-paper-muted">Choose a section</span></span><span class="text-paper-muted group-open:rotate-180 transition-transform">⌄</span></summary><div class="module-menu mt-2 p-2 rounded-2xl border border-paper-border bg-paper-surface"><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="notes" onclick="switchTab('notes')">📖 Editorial Notes <span class="text-paper-muted">(12)</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="mock" onclick="switchTab('mock')">🎤 Mock Interview <span class="text-paper-muted">· 5 Q</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="mnemonics" onclick="switchTab('mnemonics')">⚖️ Visuals &amp; Comparisons</button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="flashcards" onclick="switchTab('flashcards')">🃏 Flashcards <span class="text-paper-muted">(45)</span><span class="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold" id="desktopDueBadge" style="background-color:var(--accent-soft);color:var(--accent-primary);">45</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="scenarios" onclick="switchTab('scenarios')">🛠️ Production Cases <span class="text-paper-muted">(10)</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="lab" onclick="switchTab('lab')">🚨 Abend &amp; Utility Lab</button></div></details>
+
 </div>
 </header>
 <!-- ==================== MAIN EDITORIAL CONTENT CONTAINER ==================== -->
@@ -511,20 +514,20 @@
 <span class="w-2 h-2 rounded-full bg-slate-400" id="clozeStatusDot"></span>
 <span id="clozeToggleText">Cloze Recall: OFF</span>
 </button>
-<button class="px-3 py-1.5 rounded-full text-xs font-medium bg-paper-subtle border border-paper-border hover:opacity-80 transition cursor-pointer" onclick="expandCollapseAllNotes(true)">
-              Expand All
-            </button>
-<button class="px-3 py-1.5 rounded-full text-xs font-medium bg-paper-subtle border border-paper-border hover:opacity-80 transition cursor-pointer" onclick="expandCollapseAllNotes(false)">
-              Collapse All
-            </button>
+<button aria-label="Expand all modules" title="Expand all modules" class="w-9 h-9 rounded-full flex items-center justify-center bg-paper-subtle border border-paper-border hover:opacity-80 transition cursor-pointer" onclick="expandCollapseAllNotes(true)">
+<svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M21 16v5h-5M3 8l5-5M21 8l-5-5M3 16l5 5M21 16l-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<button aria-label="Collapse all modules" title="Collapse all modules" class="w-9 h-9 rounded-full flex items-center justify-center bg-paper-subtle border border-paper-border hover:opacity-80 transition cursor-pointer" onclick="expandCollapseAllNotes(false)">
+<svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 9H4v5M15 9h5v5M9 15H4v-5M20 10v-5h-5M4 14v5h5M20 14v5h-5M9 9L4 4M15 9l5-5M9 15l-5 5M15 15l5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 </div>
 </div>
 <!-- Category Filter Pills for 12 Note Cards -->
-<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2 border-t border-paper-border" id="noteCategoryPills">
-<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium whitespace-nowrap cursor-pointer" data-notecat="ALL" onclick="filterNoteChunks('ALL')" style="background-color: var(--accent-primary); color: #fff;">All 12 Modules</button>
-<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="core" onclick="filterNoteChunks('core')">JES2, JOB, EXEC &amp; DD (1–4)</button>
-<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="tuning" onclick="filterNoteChunks('tuning')">Tuning, Libraries, GDG &amp; PROC (5–8)</button>
-<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="advanced" onclick="filterNoteChunks('advanced')">DB2 Batch, DFSORT, Utilities &amp; Restart (9–12)</button>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-paper-border" id="noteCategoryPills">
+<button class="note-cat-btn w-full min-h-9 px-2.5 py-2 rounded-xl text-xs font-medium text-center cursor-pointer" data-notecat="ALL" onclick="filterNoteChunks('ALL')" style="background-color: var(--accent-primary); color: #fff;">All 12</button>
+<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="core" onclick="filterNoteChunks('core')">Core · 1–4</button>
+<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="tuning" onclick="filterNoteChunks('tuning')">Tuning · 5–8</button>
+<button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="advanced" onclick="filterNoteChunks('advanced')">Advanced · 9–12</button>
 </div>
 </div>
 <!-- CHUNK 1: JES2 Job Execution Lifecycle & 80-Byte Card Architecture -->
@@ -627,9 +630,9 @@
 <li><strong>On <span class="vr-syntax">DD</span>:</strong> <span class="cloze-item font-bold">* , DATA , DUMMY , DYNAM</span> are the 4 positional parameters on a DD statement.</li>
 </ul>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — JES2 / JOB lifecycle</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: TYPRUN=SCAN validates JCL through the converter; it does not execute the job or perform all interpreter-time validation. Also remember JES conversion errors (IEFC*) and interpreter/allocation errors (IEF*) are different diagnostic layers.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//CHKJCL  JOB ("ACCT"),CLASS=A,MSGCLASS=X,TYPRUN=SCAN
-//STEP1   EXEC PGM=IEFBR14</pre></div></div></details></article>
+//STEP1   EXEC PGM=IEFBR14</pre></div></div></details></div></article>
 <!-- CHUNK 2: JOB & EXEC Statement Deep Dive -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-2')">
@@ -704,9 +707,9 @@
 </div>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — JOB &amp; EXEC</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: JOB-level and EXEC-level parameters have different scope. A JOB-level TIME/REGION can establish job-wide limits, while EXEC can specify step-level values; installation exits and system limits can still constrain the effective value. For parameter passing, PARM is limited in length; use PARMDD/SYSIN when the interface requires more data.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG,PARM="RUN=FULL"
-//SYSOUT   DD SYSOUT=*</pre></div></div></details></article>
+//SYSOUT   DD SYSOUT=*</pre></div></div></details></div></article>
 <!-- CHUNK 3: Conditional Processing (COND vs IF/THEN/ELSE/ENDIF) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-3')">
@@ -751,9 +754,9 @@
 </div>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — COND / IF</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Important distinction: IF/THEN/ELSE is positive logic (TRUE selects THEN), while COND is a bypass test (TRUE causes the step to be bypassed). IBM also documents that IF structures normally do not execute their contained steps after an abend unless ABEND/ABENDCC/¬ABEND is referenced or an appropriate COND condition is used.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=PGMA
-//STEP2 EXEC PGM=PGMB,COND=(4,LT,STEP1)</pre></div></div></details></article>
+//STEP2 EXEC PGM=PGMB,COND=(4,LT,STEP1)</pre></div></div></details></div></article>
 <!-- CHUNK 4: DD Statement, DISP, Storage, BLKSIZE=0 & Concatenation -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-4')">
@@ -812,9 +815,9 @@
 //               DD DSN=TEST.PATCH.LOADLIB,DISP=SHR</pre>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — DD / DISP / SPACE</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: DISP controls the dataset disposition, not the volume disposition. Also be precise with defaults: DISP=OLD and DISP=SHR both imply KEEP on normal and abnormal termination, but their status values remain OLD and SHR respectively.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//OUT DD DSN=USER.REPORT,DISP=(NEW,CATLG,DELETE),
-//       SPACE=(CYL,(5,2),RLSE),UNIT=SYSDA</pre></div></div></details></article>
+//       SPACE=(CYL,(5,2),RLSE),UNIT=SYSDA</pre></div></div></details></div></article>
 <!-- CHUNK 5: Procedures, Overrides & Library Precedence -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-5')">
@@ -853,10 +856,10 @@
 <br/>If <code class="font-mono">JOBLIB</code> contains module <code class="font-mono">PGMA</code>, and <code class="font-mono">STEP01</code> also defines a <code class="font-mono">STEPLIB</code> that does <em>not</em> contain <code class="font-mono">PGMA</code>, what happens?
             <br/><strong>Answer:</strong> The step fails with <span class="cloze-item font-mono font-bold">S806-04 Abend (Module Not Found)</span>! When <code class="font-mono">STEPLIB</code> is present on a step, z/OS <strong>completely ignores <code class="font-mono">JOBLIB</code> for that step</strong> and goes straight from <code class="font-mono">STEPLIB</code> to LPA / LINKLIST.
           </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — PROCs / overrides / libraries</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Important lookup rule: when STEPLIB is present for a step, JOBLIB is not searched for that step. For cataloged procedures, JCLLIB controls procedure-library search order; it does not define program-load libraries. Keep these two concepts separate in interviews.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//MYJOB JOB ...
 //LIBS JCLLIB ORDER=(DEV.PROCLIB,PROD.PROCLIB)
-//STEP EXEC MYPROC</pre></div></div></details></article>
+//STEP EXEC MYPROC</pre></div></div></details></div></article>
 <!-- CHUNK 6: GDG (Generation Data Groups) Mastery -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-6')">
@@ -895,11 +898,11 @@
               </p>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — GDG</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: relative GDG references depend on the applicable GDGBIAS rules; do not treat (+1) → (0) as a universal restart rule. Distinguish GDGBIAS=JOB from GDGBIAS=STEP. Also distinguish the GDG base definition from the individual generation datasets.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=IEFBR14
 //NEWGDG DD DSN=USER.PAYROLL.GDG(+1),DISP=(NEW,CATLG,DELETE)
 //STEP2 EXEC PGM=MYPROG
-//IN     DD DSN=USER.PAYROLL.GDG(+1),DISP=SHR</pre></div></div></details></article>
+//IN     DD DSN=USER.PAYROLL.GDG(+1),DISP=SHR</pre></div></div></details></div></article>
 <!-- CHUNK 7: Performance Tuning & I/O Optimization (5-Yr Favourite) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-7')">
@@ -934,9 +937,9 @@
 </ul>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — Performance / I/O</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: tuning JCL parameters should be evidence-driven. BUFNO/AMP can affect buffering, while FREE=CLOSE releases a dataset allocation when the step closes it; these are not substitutes for fixing inefficient application I/O.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=SORT
-//SORTIN DD DSN=USER.BIG.INPUT,DISP=SHR,BUFNO=20</pre></div></div></details></article>
+//SORTIN DD DSN=USER.BIG.INPUT,DISP=SHR,BUFNO=20</pre></div></div></details></div></article>
 <!-- CHUNK 8: Load Libraries & Special DD Statements (SYSUDUMP vs SYSMDUMP vs CEEDUMP) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-8')">
@@ -970,10 +973,10 @@
 <p class="mt-1"><strong>User + System Nucleus/SQA Dump:</strong> Includes everything in <code class="font-mono">SYSUDUMP</code> plus system control blocks, LPA, and I/O buffers (huge output; rarely used in application jobs).</p>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — Special DD / dumps</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: CEEDUMP is associated with Language Environment diagnostics, while SYSUDUMP/SYSABEND/SYSMDUMP are different dump mechanisms with different detail/processing characteristics. Choose the dump DD based on the failure and diagnostic need rather than treating them as interchangeable.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG
 //SYSUDUMP DD SYSOUT=*
-//CEEDUMP  DD SYSOUT=*</pre></div></div></details></article>
+//CEEDUMP  DD SYSOUT=*</pre></div></div></details></div></article>
 <!-- CHUNK 9: DB2 + COBOL Batch JCL Execution (IKJEFT01 vs IKJEFT1A vs IKJEFT1B) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-9')">
@@ -1026,14 +1029,14 @@
   END
 /*</pre>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — DB2 + COBOL batch JCL</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: IKJEFT01/1A/1B are TSO/E terminal-monitor entry points used for batch execution of TSO commands; the 1A/1B variants differ in how non-zero returns and abends are propagated to the step. For DB2 DSN commands, the SYSTSIN stream normally contains DSN commands such as RUN/BIND/REBIND.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//BIND EXEC PGM=IKJEFT01
 //SYSTSPRT DD SYSOUT=*
 //SYSTSIN DD *
  DSN SYSTEM(DB2P)
  BIND PACKAGE(COLL) MEMBER(PROG) ACTION(REPLACE)
  END
-/*</pre></div></div></details></article>
+/*</pre></div></div></details></div></article>
 <!-- CHUNK 10: DFSORT & ICETOOL Senior Recipes -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-10')">
@@ -1072,7 +1075,7 @@
 </ul>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — DFSORT / ICETOOL</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: DFSORT control statements are not JCL statements. JCL allocates DD names and invokes SORT; SORT/INCLUDE/OUTREC/OUTFIL/JOINKEYS are DFSORT control statements read from SYSIN. JOINKEYS requires one JOINKEYS statement for each input file.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//SORT EXEC PGM=SORT
 //SORTJNF1 DD DSN=APP.CUSTOMER,DISP=SHR
 //SORTJNF2 DD DSN=APP.ORDERS,DISP=SHR
@@ -1080,7 +1083,7 @@
  JOINKEYS FILE=F1,FIELDS=(1,10,A)
  JOINKEYS FILE=F2,FIELDS=(1,10,A)
  REFORMAT FIELDS=(F1:1,20,F2:11,10)
-/*</pre></div></div></details></article>
+/*</pre></div></div></details></div></article>
 <!-- CHUNK 11: IBM Utilities Masterclass (IEFBR14 HSM Recall Trap, IEBCOPY COPYMOD, IDCAMS, SMTP) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-11')">
@@ -1121,11 +1124,11 @@
 </ul>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — IBM utilities</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: utility JCL is usually about the DD contract as much as the program name. For utilities such as IDCAMS, ICETOOL and IEBCOPY, validate the utility control statements separately from JCL syntax; TYPRUN=SCAN does not prove that utility control cards are semantically correct.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//COPY EXEC PGM=IEBCOPY
 //SYSPRINT DD SYSOUT=*
 //SYSUT3 DD UNIT=SYSDA,SPACE=(TRK,(1,1))
-//SYSUT4 DD UNIT=SYSDA,SPACE=(TRK,(1,1))</pre></div></div></details></article>
+//SYSUT4 DD UNIT=SYSDA,SPACE=(TRK,(1,1))</pre></div></div></details></div></article>
 <!-- CHUNK 12: Production Restart, Recovery & Scheduler (OPC/TWS/Control-M) Traps -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-12')">
@@ -1163,11 +1166,11 @@
 </ul>
 </div>
 </div>
-</div>
+
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — Restart / recovery / schedulers</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: JCL restartability and scheduler restartability are related but not identical. RESTART=STEPNAME[/PROCSTEP] controls where JES resumes job processing; scheduler products may add their own restart/rerun semantics, so document both layers. Do not assume a scheduler rerun is equivalent to a JES restart.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//PAYJOB JOB ...,RESTART=STEP03
 //STEP01 EXEC PGM=LOAD1
 //STEP02 EXEC PGM=CHECK1
-//STEP03 EXEC PGM=LOAD2</pre></div></div></details></article>
+//STEP03 EXEC PGM=LOAD2</pre></div></div></details></div></article>
 </section>
 <!-- =====================================================================
          MODULE 1B (NEW): 5-QUESTION LIVE MOCK INTERVIEW & THE LAST 10% MASTERY
