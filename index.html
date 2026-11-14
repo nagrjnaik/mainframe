@@ -523,8 +523,8 @@
 </div>
 </div>
 <!-- Category Filter Pills for 12 Note Cards -->
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-paper-border" id="noteCategoryPills">
-<button class="note-cat-btn w-full min-h-9 px-2.5 py-2 rounded-xl text-xs font-medium text-center cursor-pointer" data-notecat="ALL" onclick="filterNoteChunks('ALL')" style="background-color: var(--accent-primary); color: #fff;">All 12</button>
+<div class="flex flex-wrap items-center gap-2 pt-2 border-t border-paper-border" id="noteCategoryPills">
+<button class="note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap cursor-pointer" data-notecat="ALL" onclick="filterNoteChunks('ALL')" style="background-color: var(--accent-primary); color: #fff;">All 12</button>
 <button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="core" onclick="filterNoteChunks('core')">Core · 1–4</button>
 <button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="tuning" onclick="filterNoteChunks('tuning')">Tuning · 5–8</button>
 <button class="note-cat-btn px-3.5 py-1 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="advanced" onclick="filterNoteChunks('advanced')">Advanced · 9–12</button>
@@ -1792,7 +1792,7 @@
 <table class="w-full text-left border-collapse text-xs sm:text-sm">
 <thead>
 <tr class="bg-paper-subtle dark:bg-terminal-subtle text-paper-muted dark:text-terminal-muted border-b border-paper-border dark:border-terminal-border">
-<th class="p-3 font-bold">Abend</th>
+<th class="p-3 font-bold">System / User Code</th>
 <th class="p-3 font-bold">Category / Name</th>
 <th class="p-3 font-bold">Exact Root Cause (5-Yr Depth)</th>
 <th class="p-3 font-bold">Immediate Production Fix &amp; Memory Hook</th>
@@ -2453,31 +2453,35 @@
      * 3. DATA REPOSITORY: 22 SYSTEM/USER ABENDS & UTILITY CODE LAB
      *************************************************************************/
     const ABENDS_DATA = [
-      { code: 'S0C1', name: 'Operation Exception', cause: 'Attempted to execute an invalid machine instruction (0000 hex)—usually caused by a bad CALL to an unresolved subprogram name, missing DD card on OPEN, or subscript overwriting return address.', fix: 'Verify subprogram name & compiler DYNAM/NODYNAM option; check that all DD names opened by COBOL exist in JCL. [Hook: 0C1 = Zero Call / Invalid OpCode]' },
-      { code: 'S0C4', name: 'Protection / Addressing Exception', cause: 'Out-of-bounds array subscript/index, reading/writing an unopened file, uninitialized pointer, or Linkage Section parameter size mismatch between caller and callee.', fix: 'Compile with SSRANGE to catch bad subscripts; verify file is OPEN before READ/WRITE; match USING parameters in Linkage Section. [Hook: 0C4 = Out of Core/Bounds]' },
-      { code: 'S0C7', name: 'Data Exception', cause: 'Invalid non-numeric data (e.g. spaces X\'40\' or low-values X\'00\') inside a COMP-3 (Packed Decimal) or DISPLAY numeric field during arithmetic or comparison.', fix: 'Use CEEDUMP/offset to locate offending verb; initialize Working-Storage numeric fields with VALUE ZERO or validate input with IF NUMERIC. [Hook: 0C7 = Bad COMP-3 Sign/Digits]' },
-      { code: 'S0CB', name: 'Decimal Divide Exception (Divide by Zero)', cause: 'Attempted to divide a packed decimal number by zero (0), or the quotient exceeds the target receiving field size.', fix: 'Guard division logic in COBOL with IF DENOMINATOR NOT = 0 and ON SIZE ERROR. [Hook: 0CB = Divide By Zero]' },
-      { code: 'S001-4', name: 'DCB / Record Length Conflict', cause: 'COBOL FD record length or RECFM conflicts with the physical dataset DCB attributes, or hardware/damaged block read error.', fix: 'Ensure COBOL FD RECORD CONTAINS matches the dataset LRECL and BLOCK CONTAINS 0 is coded. [Hook: S001 = FD vs DCB Clash]' },
-      { code: 'S013-14', name: 'PDS Notation on Sequential File', cause: 'DD statement specifies DSN=MY.FILE(MEMBER) with a member name, but the dataset on disk is actually Sequential (DSORG=PS), or PDS directory is corrupted.', fix: 'Remove (MEMBER) from the DSN on the DD card or allocate the dataset as a PDS with directory blocks. [Hook: S013-14 = Member coded on PS file]' },
-      { code: 'S013-18', name: 'PDS Member Not Found', cause: 'JCL DD specifies DSN=MY.PDS(MEMBER) with DISP=SHR, but MEMBER does not exist in the PDS directory.', fix: 'Create the missing PDS member or fix the member name typo in the JCL. [Hook: S013-18 = Missing PDS Member]' },
-      { code: 'S013-20', name: 'Invalid BLKSIZE Multiple', cause: 'For RECFM=FB, BLKSIZE is not an exact integer multiple of LRECL.', fix: 'Code BLKSIZE=0 on the DD statement so SMS calculates an exact optimal multiple. [Hook: S013-20 = Bad Blocksize Multiple]' },
-      { code: 'S013-34', name: 'Invalid LRECL / BLKSIZE Combo', cause: 'LRECL is greater than BLKSIZE, or RECFM=VB has BLKSIZE less than LRECL + 4 (for BDW).', fix: 'Use BLKSIZE=0 and ensure VB LRECL includes +4 bytes for RDW. [Hook: S013-34 = LRECL > BLKSIZE]' },
-      { code: 'S106', name: 'Module Fetch / Loader Failure', cause: 'I/O error or insufficient virtual storage (REGION) while fetching a load module into memory (or load module copied between different BLKSIZEs without COPYMOD).', fix: 'Increase REGION=0M and use IEBCOPY COPYMOD when moving load modules across different block sizes. [Hook: S106 = Insufficient Region during Fetch]' },
-      { code: 'S213-04', name: 'Dataset Not on Volume VTOC', cause: 'Catalog points to a VOL=SER (or explicit VOL=SER was coded), but the dataset does not physically exist in that volume\'s VTOC.', fix: 'Uncatalog the stale catalog entry or restore the dataset from backup. [Hook: S213 = Missing in VTOC]' },
-      { code: 'S222 / S122', name: 'Operator Cancel', cause: 'Job was manually cancelled by an operator or user via SDSF (C = S222 without dump; CD = S122 with dump).', fix: 'Check why operations cancelled the job (e.g., contention, deadlock, wrong schedule). [Hook: 222 = Cancelled by Operator]' },
-      { code: 'S322', name: 'CPU Time Limit Exceeded', cause: 'Step consumed more CPU time than permitted by JOB/EXEC TIME= parameter or JES job class default (often an infinite loop in COBOL).', fix: 'Check for infinite loops (e.g., missing READ NEXT or index increment); if legitimate heavy volume, increase TIME= or use TIME=1440. [Hook: 322 = CPU Time Out]' },
-      { code: 'S522', name: 'Continuous Wait Timeout', cause: 'Step remained in a continuous wait state for longer than the SMF JWT (Job Wait Time) limit (usually 15–30 mins waiting on tape mount or ENQ).', fix: 'Resolve dataset/tape contention or code TIME=1440 / TIME=NOLIMIT for long-waiting tasks. [Hook: 522 = Wait Time Out]' },
-      { code: 'S706', name: 'Module Marked Not Executable', cause: 'The load module requested on EXEC PGM= was marked "Not Executable" (NCAL / unresolved external references) by the Linkage Editor during compile/link.', fix: 'Re-link the program resolving all LMOD errors (RC<=4 in IEWL/HEWL step). [Hook: 706 = Bad Link-Edit]' },
-      { code: 'S804 / S80A / S878', name: 'Virtual Storage Exhausted', cause: 'Insufficient private virtual storage (GETMAIN failure) below or above the 16MB line.', fix: 'Code REGION=0M on JOB/EXEC card and reduce excessive buffer allocations if needed below the 16M line. [Hook: 80A/878 = Out of Virtual Memory]' },
-      { code: 'S806-04', name: 'Load Module Not Found', cause: 'Program specified on EXEC PGM= or dynamic CALL was not found in STEPLIB, JOBLIB, LPA, or LINKLIST.', fix: 'Add the correct load library to STEPLIB. Remember: if STEPLIB is coded, JOBLIB is ignored for that step! [Hook: 806 = Program Missing]' },
-      { code: 'S822', name: 'Requested Region Unavailable', cause: 'The explicit REGION= value requested on the JOB/EXEC card exceeds the maximum private storage available in the initiator/system.', fix: 'Change REGION= to REGION=0M or lower the explicit region request. [Hook: 822 = Region Request Too High]' },
-      { code: 'S837-08', name: 'Max Volume Count Exceeded', cause: 'Sequential/tape dataset filled the current volume and needed another volume, exceeding the volume count in VOL=(,,,count) (default 5).', fix: 'Increase volume count parameter: VOL=(,,,20). [Hook: 837 = Needed More Volumes]' },
-      { code: 'S913', name: 'RACF / Security Violation', cause: 'User ID associated with the batch job lacks RACF READ/UPDATE/ALTER authority to open the dataset.', fix: 'Request RACF access for the batch execution ID or verify correct dataset HLQ. [Hook: 913 = Security Police]' },
-      { code: 'SB37-04', name: 'End-of-Volume / 16 Extents Full', cause: 'Dataset exhausted primary + secondary allocations (hit 16-extent per volume limit or volume has 0 free space left).', fix: 'Increase primary & secondary SPACE allocations, add RLSE, or allocate across multiple volumes VOL=(,,,5). [Hook: B37 = Both Pri & Sec Exhausted]' },
-      { code: 'SD37-04', name: 'Primary Space Full (No Secondary)', cause: 'Dataset filled its primary allocation and had 0 secondary space coded: SPACE=(CYL,(50,0)).', fix: 'Specify a non-zero secondary allocation quantity in SPACE=(CYL,(50,25)). [Hook: D37 = Didn\'t code Secondary]' },
-      { code: 'SE37-04', name: 'PDS Directory or Multi-Vol Full', cause: 'PDS directory blocks are completely full (cannot add new member) or PDS hit 16 extents.', fix: 'Compress PDS via IEBCOPY, reallocate PDS with more directory blocks, or convert to PDSE (DSNTYPE=LIBRARY). [Hook: E37 = Exceeded PDS Directory]' },
-      { code: 'U1026 / U4038', name: 'LE / COBOL User Abend', cause: 'Language Environment (U4038) or legacy COBOL (U1026) unhandled runtime failure—90% of the time caused by an unhandled File Status error (e.g. File Status 39 DCB mismatch, 35 DD missing, 46 read past EOF) or SSRANGE error.', fix: 'Inspect SYSOUT/CEEDUMP for the IGZ0035S / IGZxxxxS message to find the exact DD name and COBOL File Status code! [Hook: U4038 = Check IGZ message in SYSOUT]' },
-      { code: 'JCL ERROR / IEFC452I', name: 'Conversion / Allocation JCL Error', cause: 'Syntax error during JES2 Conversion phase (e.g., Col 17 continuation, missing comma, invalid keyword) or Dataset Not Found (IEFA107I / IEFC452I) during Allocation before step execution.', fix: 'Check JESJCL & JESYSMSG for the exact IEFCxxxxI line number; remember that Abnormal DISP does NOT trigger on a JCL Error! [Hook: IEFC = Converter syntax; IEFA = Allocation]' }
+      { code:'S0C1', name:'Operation Exception', cause:'Invalid operation or instruction execution. In application code, investigate the failing instruction and traceback; do not assume a missing DD is the cause.', fix:'Use the dump/LE traceback and failing PSW/offset to identify the instruction and module. [Hook: 0C1 = operation exception]' },
+      { code:'S0C2', name:'Privileged Operation Exception', cause:'A program attempted an instruction that is privileged for the current execution state.', fix:'Inspect the failing instruction and program/module; correct the code or execution environment. [Hook: 0C2 = privileged operation]' },
+      { code:'S0C3', name:'Execute Exception', cause:'An invalid or unavailable EXECUTE instruction operation was attempted.', fix:'Use the dump to identify the instruction stream and failing module. [Hook: 0C3 = execute exception]' },
+      { code:'S0C4', name:'Protection Exception', cause:'A storage protection or addressing-related program interruption occurred. Common application causes include bad addresses, storage corruption, or parameter mismatches.', fix:'Check PSW/offset, dump, LE traceback, caller/callee parameters, pointers, and array bounds. [Hook: 0C4 = protection]' },
+      { code:'S0C5', name:'Addressing Exception', cause:'An invalid storage address was referenced by the running program.', fix:'Use the dump and PSW to identify the bad address and failing instruction; investigate pointer/index corruption. [Hook: 0C5 = addressing]' },
+      { code:'S0C6', name:'Specification Exception', cause:'The processor detected an instruction or operand specification that is invalid for execution.', fix:'Inspect the failing instruction and module at the reported offset. [Hook: 0C6 = specification]' },
+      { code:'S0C7', name:'Data Exception', cause:'An instruction encountered invalid numeric or packed-decimal data; a common COBOL cause is invalid data in a COMP-3 or numeric field.', fix:'Use the LE traceback/offset and input record to locate the bad field; validate/initialize numeric data. [Hook: 0C7 = bad numeric data]' },
+      { code:'S0C8', name:'Fixed-Point Overflow', cause:'A fixed-point arithmetic operation produced a result outside the representable range.', fix:'Check arithmetic operands and receiving fields; inspect the failing instruction and program logic. [Hook: 0C8 = fixed-point overflow]' },
+      { code:'S0C9', name:'Fixed-Point Divide Exception', cause:'A fixed-point divide operation produced a divide exception, commonly from an invalid divisor or quotient condition.', fix:'Inspect the divisor and arithmetic instruction; validate program logic around the failing operation. [Hook: 0C9 = fixed-point divide]' },
+      { code:'S0CA', name:'Decimal Overflow', cause:'A decimal arithmetic operation produced a result that cannot be represented in the receiving field.', fix:'Check decimal operands, receiving field size, and arithmetic logic. [Hook: 0CA = decimal overflow]' },
+      { code:'S0CB', name:'Decimal Divide Exception', cause:'A decimal divide operation encountered an invalid divide condition, commonly a zero divisor.', fix:'Guard the divisor and inspect the failing decimal arithmetic operation. [Hook: 0CB = decimal divide]' },
+      { code:'S013', reason:'14', name:'Dataset Open / DCB Error', cause:'Reason code 14 is one of the S013 dataset-open cases; diagnose the IEC141I/IEC14x message rather than treating S013 as a single cause.', fix:'Read the accompanying IEC message and verify DSORG, member notation, DCB attributes, and dataset organization. [Hook: S013 = dataset OPEN/DCB problem; reason matters]' },
+      { code:'S013', reason:'18', name:'Dataset / Member Not Found', cause:'S013 reason 18 can occur when a referenced member or dataset cannot be opened as specified.', fix:'Check the exact DSN/member in the job log and verify the member exists in the expected library. [Hook: S013-18 = inspect the referenced member]' },
+      { code:'S013', reason:'20', name:'Invalid Block Size', cause:'S013 reason 20 is associated with an invalid DCB/block-size relationship in the failing OPEN.', fix:'Check RECFM, LRECL and BLKSIZE; for FB datasets, ensure BLKSIZE is valid for the LRECL. [Hook: S013-20 = DCB/blocking]' },
+      { code:'S106', reason:'0C', name:'FETCH Storage Failure', cause:'Insufficient storage was available for FETCH to obtain storage for a module or required control blocks.', fix:'Review storage usage and REGION; determine whether the failing program or workload is consuming excessive private storage. [Hook: S106-0C = FETCH storage]' },
+      { code:'S213', reason:'04', name:'Dataset Not Found on Volume', cause:'The dataset expected on a volume cannot be found there; the exact reason and allocation/catalog context matter.', fix:'Check the catalog, volume, VTOC and allocation history before uncataloging or restoring anything. [Hook: S213 = volume/dataset location]' },
+      { code:'S222', name:'Operator / User Cancel', cause:'The task was cancelled by an operator or user.', fix:'Check SDSF/operator actions and the job log to determine why cancellation occurred. [Hook: 222 = cancel]' },
+      { code:'S322', name:'CPU Time Limit Exceeded', cause:'The step exceeded its permitted processor time.', fix:'Check for loops or unexpectedly high CPU; increase TIME only when the workload legitimately requires it. [Hook: 322 = CPU time]' },
+      { code:'S522', name:'Continuous Wait Timeout', cause:'The task remained in a continuous wait state beyond the applicable installation wait-time limit.', fix:'Find the resource causing the wait—ENQ, device, tape, or another dependency—before increasing limits. [Hook: 522 = continuous wait]' },
+      { code:'S706', name:'Module Not Executable', cause:'The requested load module is not in an executable state, commonly indicating unresolved link-edit references or an invalid load module.', fix:'Review the link-edit/binder output and resolve unresolved external references; then rebuild the load module. [Hook: 706 = link/binder problem]' },
+      { code:'S806', name:'Module Not Found', cause:'The requested program/load module cannot be found in the libraries available to the step.', fix:'Check STEPLIB, JOBLIB, system libraries, member name, and the actual load-library contents. [Hook: 806 = program missing]' },
+      { code:'S822', name:'Region / Virtual Storage Unavailable', cause:'The requested region/storage could not be obtained for the step.', fix:'Review REGION and storage requirements; increase available region only when justified by the workload and installation limits. [Hook: 822 = region unavailable]' },
+      { code:'S913', name:'RACF / Security Violation', cause:'Access to a protected resource was denied by security checking.', fix:'Check the job's execution ID, dataset profile, requested access level, and RACF messages before requesting an authorization change. [Hook: 913 = security]' },
+      { code:'SB37', name:'Dataset Space / Extent Exhaustion', cause:'The dataset could not obtain additional space/extent capacity on the available volume(s).', fix:'Review primary/secondary allocation, volume availability, extent usage, and data-class/SMS rules; then resize or extend the allocation appropriately. [Hook: B37 = space/extent exhaustion]' },
+      { code:'SD37', name:'Dataset Space Exhaustion', cause:'The dataset could not obtain the required additional space under its allocation conditions.', fix:'Check SPACE secondary quantity and allocation conditions; do not assume SD37 always means the same single allocation defect. [Hook: D37 = dataset space]' },
+      { code:'SE37', name:'PDS/PDSE or Dataset Space Exhaustion', cause:'The dataset encountered an end-of-space condition; for partitioned datasets, directory/extent conditions can be involved.', fix:'Inspect the IEC message and dataset organization; consider compression/reallocation or PDSE where appropriate. [Hook: E37 = dataset space/partitioned data set]' },
+      { code:'S80A', name:'Virtual Storage Shortage', cause:'The address space encountered insufficient virtual storage.', fix:'Use the dump/VSM information to identify the exhausted area; review REGION, buffers, storage growth and allocation patterns. [Hook: 80A = out of storage]' },
+      { code:'S878', name:'Virtual Storage Shortage', cause:'The address space could not obtain required virtual storage.', fix:'Identify which storage area is exhausted and reduce/resize storage consumers or increase available region where appropriate. [Hook: 878 = out of storage]' },
+      { code:'U4038', name:'Language Environment / COBOL User Abend', cause:'A Language Environment application terminated with user abend U4038; the underlying cause is application/runtime specific.', fix:'Read the preceding CEE/IGZ messages and CEEDUMP/traceback. Do not attribute U4038 to one fixed COBOL error. [Hook: U4038 = inspect LE message/traceback]' }
     ];
 
     const UTILITIES_DATA = {
@@ -2863,6 +2867,14 @@
       const target = document.getElementById(`module-${tabId}`);
       if (target) target.classList.remove('hidden');
 
+      // Dynamic modules are rendered on entry as well as initial load.
+      // This prevents stale/empty panels after navigation or restored browser state.
+      if (tabId === 'scenarios') renderScenarios('');
+      if (tabId === 'lab') {
+        renderAbendTable(document.getElementById('abendFilterInput')?.value || '');
+        selectUtilityTab(activeUtilityKey || 'joinkeys');
+      }
+
       // Update Desktop Tab styling with calm pill highlight
       document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         const active = btn.getAttribute('data-tab') === tabId;
@@ -3202,6 +3214,7 @@
     /* ---------------- MODULE 4: 5-YR SCENARIOS RENDERER ---------------- */
     function renderScenarios(filterText = '') {
       const container = document.getElementById('scenariosList');
+      if (!container) return;
       const q = filterText.trim().toLowerCase();
       const filtered = SCENARIOS_DATA.filter(s =>
         !q ||
@@ -3212,6 +3225,10 @@
         s.answer.toLowerCase().includes(q)
       );
 
+      if (!filtered.length) {
+        container.innerHTML = '<div class="rounded-2xl border border-paper-border bg-paper-subtle p-5 text-sm text-paper-muted">No production cases match this search.</div>';
+        return;
+      }
       container.innerHTML = filtered.map((s, idx) => `
         <article class="bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
           <div class="p-4 sm:p-6 space-y-3">
@@ -3260,6 +3277,7 @@
     /* ---------------- MODULE 5: ABEND MATRIX & UTILITY LAB ---------------- */
     function renderAbendTable(query = '') {
       const tbody = document.getElementById('abendTableBody');
+      if (!tbody) return;
       const q = query.trim().toLowerCase();
       const filtered = ABENDS_DATA.filter(a =>
         !q ||
@@ -3269,6 +3287,10 @@
         a.fix.toLowerCase().includes(q)
       );
 
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="4" class="p-5 text-center text-paper-muted">No abend codes match this search.</td></tr>';
+        return;
+      }
       tbody.innerHTML = filtered.map(a => `
         <tr class="hover:bg-paper-subtle/60 dark:hover:bg-slate-800/40 transition">
           <td class="p-3 whitespace-nowrap"><span class="vr-abend">${a.code}</span></td>
