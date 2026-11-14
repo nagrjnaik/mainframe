@@ -15,7 +15,7 @@
 <!-- Embedded SVG App Icon for Home Screen & Browser Tab -->
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%233B6E5C'/%3E%3Crect x='36' y='36' width='440' height='440' rx='84' fill='%23F6F5F0'/%3E%3Ctext x='256' y='265' font-family='monospace' font-weight='800' font-size='150' text-anchor='middle' fill='%233B6E5C'%3E//JCL%3C/text%3E%3Ctext x='256' y='375' font-family='sans-serif' font-weight='700' font-size='56' text-anchor='middle' fill='%238C5E3C'%3E5-YR PRO%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%233B6E5C'/%3E%3Crect x='36' y='36' width='440' height='440' rx='84' fill='%23F6F5F0'/%3E%3Ctext x='256' y='265' font-family='monospace' font-weight='800' font-size='150' text-anchor='middle' fill='%233B6E5C'%3E//JCL%3C/text%3E%3Ctext x='256' y='375' font-family='sans-serif' font-weight='700' font-size='56' text-anchor='middle' fill='%238C5E3C'%3E5-YR PRO%3C/text%3E%3C/svg%3E" rel="apple-touch-icon"/>
-<link id="pwaManifestLink" rel="manifest"/>
+<link href="./manifest.webmanifest" rel="manifest"/>
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <!-- Google Fonts: Plus Jakarta Sans (Soft Humanist UI), Literata (Editorial Book Serif), Lexend (Cognitive Ease), Fira Code (Soft Monospace) -->
@@ -57,6 +57,13 @@
     };
   </script>
 <style>
+    /* PROFESSIONAL STUDY-APP LAYOUT */
+    :root{--ui-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;--reading-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
+    html[data-font="sans"]{--reading-font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif} html[data-font="serif"]{--reading-font:'Literata',Georgia,serif} html[data-font="lexend"]{--reading-font:'Lexend',system-ui,sans-serif}
+    body,button,input,select,textarea{font-family:var(--reading-font)} h1,h2,h3,h4,h5,h6,.font-heading{font-family:var(--ui-font)!important} code,pre,.jcl-code,.font-mono{font-family:'Fira Code',ui-monospace,SFMono-Regular,Menlo,monospace!important}
+    .app-header-inner{max-width:1180px}.editorial-stream{max-width:980px}.module-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}.module-menu button{min-height:42px;text-align:left}
+    .senior-notes{margin-top:1rem;border:1px solid color-mix(in srgb,var(--accent-primary) 20%,var(--border-subtle));border-radius:16px;background:color-mix(in srgb,var(--accent-soft) 35%,var(--bg-surface));overflow:hidden}.senior-notes summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;font-size:.78rem;color:var(--accent-primary);display:flex;align-items:center;justify-content:space-between;gap:.75rem}.senior-notes summary::-webkit-details-marker{display:none}.senior-notes summary:after{content:'+'}.senior-notes[open] summary:after{content:'−'}.senior-notes-content{padding:0 1rem 1rem}.note-chunk>button{min-height:68px}.search-status{border:1px solid var(--border-subtle);background:var(--bg-subtle);border-radius:14px;padding:.65rem .8rem}
+    @media(max-width:767px){.module-menu{grid-template-columns:1fr}.editorial-stream{padding-left:.9rem!important;padding-right:.9rem!important}.note-chunk>button{padding:.85rem 1rem!important}#settingsPopoverModal{width:min(24rem,calc(100vw - 1.5rem))!important;right:-.35rem;max-height:calc(100vh - 5rem);overflow-y:auto}}
     /* =====================================================================
        SCIENTIFICALLY CALMING PALETTE TOKENS (SAGE, KINDLE SEPIA, NORD DUSK)
        ===================================================================== */
@@ -315,7 +322,7 @@
 <body class="bg-paper-bg text-paper-text min-h-screen pb-28 md:pb-16 selection:bg-emerald-200/60 dark:selection:bg-slate-700">
 <!-- ==================== STICKY CALM EDITORIAL HEADER ==================== -->
 <header class="sticky top-0 z-40 bg-paper-bg/95 backdrop-blur-md border-b border-paper-border transition-colors">
-<div class="max-w-5xl mx-auto px-4 sm:px-6 py-3">
+<div class="app-header-inner mx-auto px-4 sm:px-6 py-3">
 <div class="flex items-center justify-between gap-3">
 <!-- Brand & Calm Subtitle -->
 <div class="flex items-center gap-3 min-w-0">
@@ -330,7 +337,7 @@
               </span>
 </div>
 <p class="text-xs text-paper-muted hidden sm:block">
-              Designed for effortless reading, deep retention &amp; 5-year senior mainframe interviews
+              Focused revision for 4–6 year mainframe interviews
             </p>
 </div>
 </div>
@@ -441,16 +448,11 @@
                 </button>
 </div>
 </div>
-<!-- 5. Install as Phone App (PWA & Offline HTML Download) -->
+<!-- 5. Install -->
 <div class="space-y-2 pt-2.5 border-t border-paper-border">
-<span class="font-semibold text-paper-muted uppercase tracking-wider text-[10px] block">5. 📲 Install as Phone App</span>
+<span class="font-semibold text-paper-muted uppercase tracking-wider text-[10px] block">5. Install</span>
 <div class="flex justify-end">
-<button aria-label="Install JCL review" class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl font-semibold text-xs text-white transition cursor-pointer shadow-2xs" id="pwaInstallActionBtn" onclick="triggerPhoneAppInstall()" style="background-color: var(--accent-primary);" title="Install JCL review as an app">
-<svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-<path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg>
-<span>Install</span>
-</button>
+<button aria-label="Install JCL review" class="inline-flex items-center justify-center p-2 rounded-xl border border-paper-border bg-paper-subtle text-paper-text hover:opacity-80 transition cursor-pointer" id="pwaInstallActionBtn" onclick="triggerPhoneAppInstall()" title="Install JCL review"><svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"></path></svg></button>
 </div>
 </div>
 <!-- 6. About & Developer Attribution -->
@@ -483,34 +485,14 @@
             Clear
           </button>
 </div>
-<p class="text-xs text-paper-muted mt-1.5 px-1 hidden" id="searchStatusText"></p>
+<p class="text-xs text-paper-muted mt-1.5 px-1 hidden" aria-live="polite" id="searchStatusText" role="status"></p>
 </div>
 <!-- Desktop Segmented Navigation Bar -->
-<nav aria-label="Main Study Modules" class="hidden md:flex items-center gap-1.5 pt-3 mt-2.5 border-t border-paper-border overflow-x-auto no-scrollbar">
-<button class="nav-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer whitespace-nowrap" data-tab="notes" onclick="switchTab('notes')">
-<span>📖 1. Editorial Notes (12)</span>
-</button>
-<button class="nav-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer whitespace-nowrap" data-tab="mock" onclick="switchTab('mock')">
-<span>🎤 2. 5-Q Mock Interview &amp; Last 10%</span>
-</button>
-<button class="nav-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer whitespace-nowrap" data-tab="mnemonics" onclick="switchTab('mnemonics')">
-<span>⚖️ 3. Visuals &amp; Comparisons</span>
-</button>
-<button class="nav-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer whitespace-nowrap" data-tab="flashcards" onclick="switchTab('flashcards')">
-<span>🃏 4. Flashcards (45)</span>
-<span class="px-1.5 py-0.2 rounded-full text-[10px] font-semibold" id="desktopDueBadge" style="background-color: var(--accent-soft); color: var(--accent-primary);">45</span>
-</button>
-<button class="nav-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer whitespace-nowrap" data-tab="scenarios" onclick="switchTab('scenarios')">
-<span>🛠️ 5. Production Cases (10)</span>
-</button>
-<button class="nav-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer whitespace-nowrap" data-tab="lab" onclick="switchTab('lab')">
-<span>🚨 6. Abend &amp; Utility Lab</span>
-</button>
-</nav>
+<details class="mt-3 border-t border-paper-border pt-3 group" id="studyModuleMenu"><summary class="list-none cursor-pointer flex items-center justify-between gap-3 rounded-2xl bg-paper-subtle px-4 py-2.5 text-sm font-semibold"><span class="flex items-center gap-2"><span>▦</span><span>Study modules</span><span class="text-[11px] font-normal text-paper-muted">Choose a section</span></span><span class="text-paper-muted group-open:rotate-180 transition-transform">⌄</span></summary><div class="module-menu mt-2 p-2 rounded-2xl border border-paper-border bg-paper-surface"><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="notes" onclick="switchTab('notes')">📖 Editorial Notes <span class="text-paper-muted">(12)</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="mock" onclick="switchTab('mock')">🎤 Mock Interview <span class="text-paper-muted">· 5 Q</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="mnemonics" onclick="switchTab('mnemonics')">⚖️ Visuals &amp; Comparisons</button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="flashcards" onclick="switchTab('flashcards')">🃏 Flashcards <span class="text-paper-muted">(45)</span><span class="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold" id="desktopDueBadge" style="background-color:var(--accent-soft);color:var(--accent-primary);">45</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="scenarios" onclick="switchTab('scenarios')">🛠️ Production Cases <span class="text-paper-muted">(10)</span></button><button class="nav-tab-btn rounded-xl px-3 py-2 text-xs font-medium transition cursor-pointer" data-tab="lab" onclick="switchTab('lab')">🚨 Abend &amp; Utility Lab</button></div></details>
 </div>
 </header>
 <!-- ==================== MAIN EDITORIAL CONTENT CONTAINER ==================== -->
-<main class="editorial-stream px-4 sm:px-6 pt-6 space-y-8">
+<main class="editorial-stream px-4 sm:px-6 pt-5 space-y-6">
 <!-- =====================================================================
          MODULE 1: NOTES & CHUNKS (COGNITIVE CHUNKING + CLOZE RECALL MODE)
          ===================================================================== -->
@@ -520,7 +502,7 @@
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 <div>
 <h2 class="font-heading font-bold text-lg sm:text-xl flex items-center gap-2">
-<span>12-Module Senior JCL Editorial Study Guide</span>
+<span>12-Module JCL Review</span>
 </h2>
 </div>
 <div class="flex flex-wrap items-center gap-2 shrink-0">
@@ -646,8 +628,8 @@
 </ul>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — JES2 / JOB lifecycle</h4><p class="text-xs sm:text-sm">Missing senior point: TYPRUN=SCAN validates JCL through the converter; it does not execute the job or perform all interpreter-time validation. Also remember JES conversion errors (IEFC*) and interpreter/allocation errors (IEF*) are different diagnostic layers.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//CHKJCL  JOB ("ACCT"),CLASS=A,MSGCLASS=X,TYPRUN=SCAN
-//STEP1   EXEC PGM=IEFBR14</pre></div></div></article>
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — JES2 / JOB lifecycle</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: TYPRUN=SCAN validates JCL through the converter; it does not execute the job or perform all interpreter-time validation. Also remember JES conversion errors (IEFC*) and interpreter/allocation errors (IEF*) are different diagnostic layers.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//CHKJCL  JOB ("ACCT"),CLASS=A,MSGCLASS=X,TYPRUN=SCAN
+//STEP1   EXEC PGM=IEFBR14</pre></div></div></details></article>
 <!-- CHUNK 2: JOB & EXEC Statement Deep Dive -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-2')">
@@ -723,8 +705,8 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — JOB &amp; EXEC</h4><p class="text-xs sm:text-sm">Missing senior point: JOB-level and EXEC-level parameters have different scope. A JOB-level TIME/REGION can establish job-wide limits, while EXEC can specify step-level values; installation exits and system limits can still constrain the effective value. For parameter passing, PARM is limited in length; use PARMDD/SYSIN when the interface requires more data.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG,PARM="RUN=FULL"
-//SYSOUT   DD SYSOUT=*</pre></div></div></article>
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — JOB &amp; EXEC</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: JOB-level and EXEC-level parameters have different scope. A JOB-level TIME/REGION can establish job-wide limits, while EXEC can specify step-level values; installation exits and system limits can still constrain the effective value. For parameter passing, PARM is limited in length; use PARMDD/SYSIN when the interface requires more data.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG,PARM="RUN=FULL"
+//SYSOUT   DD SYSOUT=*</pre></div></div></details></article>
 <!-- CHUNK 3: Conditional Processing (COND vs IF/THEN/ELSE/ENDIF) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-3')">
@@ -770,8 +752,8 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — COND / IF</h4><p class="text-xs sm:text-sm">Important distinction: IF/THEN/ELSE is positive logic (TRUE selects THEN), while COND is a bypass test (TRUE causes the step to be bypassed). IBM also documents that IF structures normally do not execute their contained steps after an abend unless ABEND/ABENDCC/¬ABEND is referenced or an appropriate COND condition is used.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=PGMA
-//STEP2 EXEC PGM=PGMB,COND=(4,LT,STEP1)</pre></div></div></article>
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — COND / IF</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Important distinction: IF/THEN/ELSE is positive logic (TRUE selects THEN), while COND is a bypass test (TRUE causes the step to be bypassed). IBM also documents that IF structures normally do not execute their contained steps after an abend unless ABEND/ABENDCC/¬ABEND is referenced or an appropriate COND condition is used.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=PGMA
+//STEP2 EXEC PGM=PGMB,COND=(4,LT,STEP1)</pre></div></div></details></article>
 <!-- CHUNK 4: DD Statement, DISP, Storage, BLKSIZE=0 & Concatenation -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-4')">
@@ -779,7 +761,7 @@
 <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">04</span>
 <div>
 <h3 class="font-heading font-bold text-base sm:text-lg">DD Statement, DISP Matrix, SPACE, BLKSIZE=0 &amp; Concatenation</h3>
-<p class="text-xs text-paper-muted dark:text-terminal-muted">DISP defaults, 3390 half-track blocking, 16/123 extent limits, and STEPLIB concatenation overrides</p>
+<p class="text-xs text-paper-muted dark:text-terminal-muted">DISP defaults, system-determined blocking and extent considerations, and STEPLIB concatenation overrides</p>
 </div>
 </div>
 <svg class="w-5 h-5 text-paper-muted transition-transform duration-200 rotate-180" fill="none" id="icon-chunk-4" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
@@ -831,8 +813,8 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — DD / DISP / SPACE</h4><p class="text-xs sm:text-sm">Senior point: DISP controls the dataset disposition, not the volume disposition. Also be precise with defaults: DISP=OLD and DISP=SHR both imply KEEP on normal and abnormal termination, but their status values remain OLD and SHR respectively.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//OUT DD DSN=USER.REPORT,DISP=(NEW,CATLG,DELETE),
-//       SPACE=(CYL,(5,2),RLSE),UNIT=SYSDA</pre></div></div></article>
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — DD / DISP / SPACE</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: DISP controls the dataset disposition, not the volume disposition. Also be precise with defaults: DISP=OLD and DISP=SHR both imply KEEP on normal and abnormal termination, but their status values remain OLD and SHR respectively.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//OUT DD DSN=USER.REPORT,DISP=(NEW,CATLG,DELETE),
+//       SPACE=(CYL,(5,2),RLSE),UNIT=SYSDA</pre></div></div></details></article>
 <!-- CHUNK 5: Procedures, Overrides & Library Precedence -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-5')">
@@ -872,9 +854,9 @@
             <br/><strong>Answer:</strong> The step fails with <span class="cloze-item font-mono font-bold">S806-04 Abend (Module Not Found)</span>! When <code class="font-mono">STEPLIB</code> is present on a step, z/OS <strong>completely ignores <code class="font-mono">JOBLIB</code> for that step</strong> and goes straight from <code class="font-mono">STEPLIB</code> to LPA / LINKLIST.
           </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — PROCs / overrides / libraries</h4><p class="text-xs sm:text-sm">Important lookup rule: when STEPLIB is present for a step, JOBLIB is not searched for that step. For cataloged procedures, JCLLIB controls procedure-library search order; it does not define program-load libraries. Keep these two concepts separate in interviews.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//MYJOB JOB ...
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — PROCs / overrides / libraries</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Important lookup rule: when STEPLIB is present for a step, JOBLIB is not searched for that step. For cataloged procedures, JCLLIB controls procedure-library search order; it does not define program-load libraries. Keep these two concepts separate in interviews.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//MYJOB JOB ...
 //LIBS JCLLIB ORDER=(DEV.PROCLIB,PROD.PROCLIB)
-//STEP EXEC MYPROC</pre></div></div></article>
+//STEP EXEC MYPROC</pre></div></div></details></article>
 <!-- CHUNK 6: GDG (Generation Data Groups) Mastery -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-6')">
@@ -909,15 +891,15 @@
 <strong>Answer:</strong> You must still refer to it as <span class="cloze-item font-mono font-bold">MY.GDG(+1)</span> with <code class="font-mono">DISP=SHR</code>! Why? Because JES resolves relative generation numbers against the catalog when the <strong>job starts</strong> (or locks the base index for the life of the job). It only rolls over to <code class="font-mono">(0)</code> for <em>subsequent</em> jobs!
               </p>
 <p class="text-xs sm:text-sm mt-1">
-<strong>Reading All Generations Together:</strong> Code the <strong>GDG Base Name without any generation number</strong> (<code class="font-mono">DSN=MY.GDG,DISP=SHR</code>). By default (<code class="font-mono">LIFO</code>), z/OS concatenates from <strong>newest <code class="font-mono">(0)</code> to oldest <code class="font-mono">(-n)</code></strong>. In z/OS 2.1+, coding <span class="vr-syntax">GDGORDER=FIFO</span> on the DD statement reads from oldest to newest!
+<strong>Reading All Generations Together:</strong> Code the <strong>GDG Base Name without any generation number</strong> (<code class="font-mono">DSN=MY.GDG,DISP=SHR</code>). When a GDG base name is used without a generation number, the default order is <strong><code class="font-mono">USECATLG</code></strong>. <code class="font-mono">GDGORDER=LIFO</code> reads newest to oldest; <code class="font-mono">GDGORDER=FIFO</code> reads oldest to newest.
               </p>
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — GDG</h4><p class="text-xs sm:text-sm">Senior point: relative GDG references are resolved in the context of the job, so a newly created (+1) generation is not automatically referenced as (0) by a later step in the same job. Also distinguish the GDG base definition from the individual generation datasets.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=IEFBR14
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — GDG</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: relative GDG references depend on the applicable GDGBIAS rules; do not treat (+1) → (0) as a universal restart rule. Distinguish GDGBIAS=JOB from GDGBIAS=STEP. Also distinguish the GDG base definition from the individual generation datasets.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=IEFBR14
 //NEWGDG DD DSN=USER.PAYROLL.GDG(+1),DISP=(NEW,CATLG,DELETE)
 //STEP2 EXEC PGM=MYPROG
-//IN     DD DSN=USER.PAYROLL.GDG(+1),DISP=SHR</pre></div></div></article>
+//IN     DD DSN=USER.PAYROLL.GDG(+1),DISP=SHR</pre></div></div></details></article>
 <!-- CHUNK 7: Performance Tuning & I/O Optimization (5-Yr Favourite) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-7')">
@@ -937,7 +919,7 @@
 <div class="p-3.5 rounded-xl bg-paper-subtle dark:bg-terminal-subtle border border-paper-border dark:border-terminal-border space-y-2">
 <h4 class="font-bold text-blue-700 dark:text-blue-400">QSAM &amp; VSAM Buffer Tuning in JCL</h4>
 <ul class="text-xs sm:text-sm list-disc pl-4 space-y-1.5">
-<li><strong><span class="vr-syntax">DCB=(BUFNO=30)</span> (Sequential QSAM):</strong> Default z/OS QSAM buffer count is only <span class="cloze-item font-bold">5 buffers</span>. Increasing <code class="font-mono">BUFNO</code> to <strong>20–40</strong> (enough for 1–2 cylinders of tracks) enables chained I/O scheduling and cuts sequential elapsed time by 40–60%.</li>
+<li><strong><span class="vr-syntax">DCB=(BUFNO=30)</span> (Sequential QSAM):</strong> Tune <code class="font-mono">BUFNO</code> from measured I/O behavior; larger buffering can improve sequential I/O, but the optimum depends on workload and system configuration.</li>
 <li><strong><span class="vr-syntax">AMP=('BUFND=60,BUFNI=15')</span> (VSAM KSDS):</strong>
 <br/>• <strong>Sequential VSAM processing:</strong> Increase Data Buffers (<span class="cloze-item font-mono font-bold">BUFND</span>) so an entire Control Area (CA) can be read in one I/O chain.
                   <br/>• <strong>Random/Dynamic VSAM processing:</strong> Increase Index Buffers (<span class="cloze-item font-mono font-bold">BUFNI</span>) so index set &amp; sequence set CIs remain resident in memory.
@@ -948,13 +930,13 @@
 <h4 class="font-bold text-blue-700 dark:text-blue-400">FREE=CLOSE &amp; UNIT=AFF</h4>
 <ul class="text-xs sm:text-sm list-disc pl-4 space-y-1.5">
 <li><strong><span class="vr-syntax">FREE=CLOSE</span> (Releasing CICS/Online Locks Early):</strong> Normally, a dataset allocated to a step remains enqueued (<code class="font-mono">SYSDSN ENQ</code>) until the <strong>entire step terminates</strong>. Coding <span class="cloze-item font-mono font-bold">FREE=CLOSE</span> on the DD statement releases the dataset lock the exact millisecond the COBOL program executes <code class="font-mono">CLOSE file-name</code>, allowing CICS regions or other jobs to access it immediately while the batch step continues running!</li>
-<li><strong><span class="vr-syntax">UNIT=AFF=ddname</span> (Unit Affinity):</strong> Forces multiple tape datasets in the same step (which are not opened simultaneously) to share the <strong>same physical tape drive</strong>, reducing tape mount contention.</li>
+<li><strong><span class="vr-syntax">UNIT=AFF=ddname</span> (Unit Affinity):</strong> Forces multiple tape datasets in the same step (which are not opened simultaneously) to share the <strong>same device or device group, subject to allocation rules</strong>, reducing tape mount contention.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — Performance / I/O</h4><p class="text-xs sm:text-sm">Senior point: tuning JCL parameters should be evidence-driven. BUFNO/AMP can affect buffering, while FREE=CLOSE releases a dataset allocation when the step closes it; these are not substitutes for fixing inefficient application I/O.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=SORT
-//SORTIN DD DSN=USER.BIG.INPUT,DISP=SHR,BUFNO=20</pre></div></div></article>
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — Performance / I/O</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: tuning JCL parameters should be evidence-driven. BUFNO/AMP can affect buffering, while FREE=CLOSE releases a dataset allocation when the step closes it; these are not substitutes for fixing inefficient application I/O.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1 EXEC PGM=SORT
+//SORTIN DD DSN=USER.BIG.INPUT,DISP=SHR,BUFNO=20</pre></div></div></details></article>
 <!-- CHUNK 8: Load Libraries & Special DD Statements (SYSUDUMP vs SYSMDUMP vs CEEDUMP) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-8')">
@@ -989,9 +971,9 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — Special DD / dumps</h4><p class="text-xs sm:text-sm">Senior point: CEEDUMP is associated with Language Environment diagnostics, while SYSUDUMP/SYSABEND/SYSMDUMP are different dump mechanisms with different detail/processing characteristics. Choose the dump DD based on the failure and diagnostic need rather than treating them as interchangeable.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — Special DD / dumps</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: CEEDUMP is associated with Language Environment diagnostics, while SYSUDUMP/SYSABEND/SYSMDUMP are different dump mechanisms with different detail/processing characteristics. Choose the dump DD based on the failure and diagnostic need rather than treating them as interchangeable.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//STEP1   EXEC PGM=MYPROG
 //SYSUDUMP DD SYSOUT=*
-//CEEDUMP  DD SYSOUT=*</pre></div></div></article>
+//CEEDUMP  DD SYSOUT=*</pre></div></div></details></article>
 <!-- CHUNK 9: DB2 + COBOL Batch JCL Execution (IKJEFT01 vs IKJEFT1A vs IKJEFT1B) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-9')">
@@ -1045,13 +1027,13 @@
 /*</pre>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — DB2 + COBOL batch JCL</h4><p class="text-xs sm:text-sm">Senior point: IKJEFT01/1A/1B are TSO/E terminal-monitor entry points used for batch execution of TSO commands; the 1A/1B variants differ in how non-zero returns and abends are propagated to the step. For DB2 DSN commands, the SYSTSIN stream normally contains DSN commands such as RUN/BIND/REBIND.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//BIND EXEC PGM=IKJEFT01
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — DB2 + COBOL batch JCL</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: IKJEFT01/1A/1B are TSO/E terminal-monitor entry points used for batch execution of TSO commands; the 1A/1B variants differ in how non-zero returns and abends are propagated to the step. For DB2 DSN commands, the SYSTSIN stream normally contains DSN commands such as RUN/BIND/REBIND.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//BIND EXEC PGM=IKJEFT01
 //SYSTSPRT DD SYSOUT=*
 //SYSTSIN DD *
  DSN SYSTEM(DB2P)
  BIND PACKAGE(COLL) MEMBER(PROG) ACTION(REPLACE)
  END
-/*</pre></div></div></article>
+/*</pre></div></div></details></article>
 <!-- CHUNK 10: DFSORT & ICETOOL Senior Recipes -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-10')">
@@ -1091,14 +1073,14 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — DFSORT / ICETOOL</h4><p class="text-xs sm:text-sm">Senior point: DFSORT control statements are not JCL statements. JCL allocates DD names and invokes SORT; SORT/INCLUDE/OUTREC/OUTFIL/JOINKEYS are DFSORT control statements read from SYSIN. JOINKEYS requires one JOINKEYS statement for each input file.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//SORT EXEC PGM=SORT
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — DFSORT / ICETOOL</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: DFSORT control statements are not JCL statements. JCL allocates DD names and invokes SORT; SORT/INCLUDE/OUTREC/OUTFIL/JOINKEYS are DFSORT control statements read from SYSIN. JOINKEYS requires one JOINKEYS statement for each input file.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//SORT EXEC PGM=SORT
 //SORTJNF1 DD DSN=APP.CUSTOMER,DISP=SHR
 //SORTJNF2 DD DSN=APP.ORDERS,DISP=SHR
 //SYSIN DD *
  JOINKEYS FILE=F1,FIELDS=(1,10,A)
  JOINKEYS FILE=F2,FIELDS=(1,10,A)
  REFORMAT FIELDS=(F1:1,20,F2:11,10)
-/*</pre></div></div></article>
+/*</pre></div></div></details></article>
 <!-- CHUNK 11: IBM Utilities Masterclass (IEFBR14 HSM Recall Trap, IEBCOPY COPYMOD, IDCAMS, SMTP) -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-11')">
@@ -1140,10 +1122,10 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — IBM utilities</h4><p class="text-xs sm:text-sm">Senior point: utility JCL is usually about the DD contract as much as the program name. For utilities such as IDCAMS, ICETOOL and IEBCOPY, validate the utility control statements separately from JCL syntax; TYPRUN=SCAN does not prove that utility control cards are semantically correct.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//COPY EXEC PGM=IEBCOPY
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — IBM utilities</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: utility JCL is usually about the DD contract as much as the program name. For utilities such as IDCAMS, ICETOOL and IEBCOPY, validate the utility control statements separately from JCL syntax; TYPRUN=SCAN does not prove that utility control cards are semantically correct.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//COPY EXEC PGM=IEBCOPY
 //SYSPRINT DD SYSOUT=*
 //SYSUT3 DD UNIT=SYSDA,SPACE=(TRK,(1,1))
-//SYSUT4 DD UNIT=SYSDA,SPACE=(TRK,(1,1))</pre></div></div></article>
+//SYSUT4 DD UNIT=SYSDA,SPACE=(TRK,(1,1))</pre></div></div></details></article>
 <!-- CHUNK 12: Production Restart, Recovery & Scheduler (OPC/TWS/Control-M) Traps -->
 <article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="advanced">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-12')">
@@ -1182,10 +1164,10 @@
 </div>
 </div>
 </div>
-<div class="mt-4 p-3.5 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle/70 dark:bg-terminal-subtle/70 space-y-2"><h4 class="font-bold text-sm text-blue-700 dark:text-blue-400">★ Senior Missing Notes — Restart / recovery / schedulers</h4><p class="text-xs sm:text-sm">Senior point: JCL restartability and scheduler restartability are related but not identical. RESTART=STEPNAME[/PROCSTEP] controls where JES resumes job processing; scheduler products may add their own restart/rerun semantics, so document both layers. Do not assume a scheduler rerun is equivalent to a JES restart.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//PAYJOB JOB ...,RESTART=STEP03
+<details class="senior-notes"><summary><span>★ Senior Missing Notes — Restart / recovery / schedulers</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Senior point: JCL restartability and scheduler restartability are related but not identical. RESTART=STEPNAME[/PROCSTEP] controls where JES resumes job processing; scheduler products may add their own restart/rerun semantics, so document both layers. Do not assume a scheduler rerun is equivalent to a JES restart.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//PAYJOB JOB ...,RESTART=STEP03
 //STEP01 EXEC PGM=LOAD1
 //STEP02 EXEC PGM=CHECK1
-//STEP03 EXEC PGM=LOAD2</pre></div></div></article>
+//STEP03 EXEC PGM=LOAD2</pre></div></div></details></article>
 </section>
 <!-- =====================================================================
          MODULE 1B (NEW): 5-QUESTION LIVE MOCK INTERVIEW & THE LAST 10% MASTERY
@@ -1884,8 +1866,8 @@
             //JCL
           </div>
 <div>
-<h3 class="font-heading font-bold text-base text-paper-text">Install as Fullscreen Phone App</h3>
-<p class="text-[11px] text-paper-muted">Works offline-ready with custom home screen icon</p>
+<h3 class="font-heading font-bold text-base text-paper-text">Install JCL review</h3>
+<p class="text-[11px] text-paper-muted">Installable study app with optional offline caching</p>
 </div>
 </div>
 <button aria-label="Close Install Guide" class="p-1.5 rounded-full hover:bg-paper-subtle text-paper-muted cursor-pointer" onclick="closeInstallAppModal()">✕</button>
@@ -2018,7 +2000,7 @@
         id: 14,
         category: 'Core & EXEC/DD',
         q: 'Why does coding TIME=1440 or TIME=NOLIMIT do more than just grant 24 hours of CPU time?',
-        a: 'In z/OS, <span class="vr-syntax">TIME=1440</span> or <span class="vr-syntax">TIME=NOLIMIT</span> grants <strong>unlimited CPU time</strong> (disables <span class="vr-abend">S322</span>) AND <strong>turns off SMF wait-time enforcement</strong> (disables <span class="vr-abend">S522</span>).',
+        a: 'In z/OS, <span class="vr-syntax">TIME=1440</span> or <span class="vr-syntax">TIME=NOLIMIT</span> grants <strong>unlimited CPU time</strong> (disables <span class="vr-abend">S322</span>) AND <strong>allows unlimited processor time and permits continuous wait beyond the installation SMF continuous-wait limit</strong> (disables <span class="vr-abend">S522</span>).',
         hook: 'Anchor: TIME=1440 kills both S322 (CPU) and S522 (Wait).'
       },
       {
@@ -2089,7 +2071,7 @@
         category: 'Core & EXEC/DD',
         q: 'What happens if you code COND=(0,LE) on a job step?',
         a: 'The step is <strong>unconditionally bypassed</strong>! Why? Because z/OS tests if <code class="font-mono">0 is Less Than or Equal To</code> the previous step\'s RC. Since return codes are always <code class="font-mono">&gt;= 0</code>, <code class="font-mono">0 &lt;= RC</code> is ALWAYS TRUE, so the step is skipped.',
-        hook: 'Anchor: COND=(0,LE) is the standard JCL idiom to turn off a step.'
+        hook: 'Anchor: COND=(0,LE) is the common JCL idiom for intentionally bypassing a step.'
       },
       {
         id: 25,
@@ -2214,7 +2196,7 @@
         id: 42,
         category: 'Abends & Tuning',
         q: 'What is UNIT=AFF=ddname used for on a DD statement?',
-        a: '<span class="vr-syntax">UNIT=AFF=ddname</span> (Unit Affinity) instructs z/OS to allocate the dataset to the <strong>same physical tape drive</strong> used by `ddname` in the same step (provided both datasets are not open at the exact same time), saving scarce tape drives.',
+        a: '<span class="vr-syntax">UNIT=AFF=ddname</span> (Unit Affinity) instructs z/OS to allocate the dataset to the <strong>same device or device group, subject to allocation rules</strong> used by `ddname` in the same step (provided both datasets are not open at the exact same time), saving scarce tape drives.',
         hook: 'Anchor: UNIT=AFF shares one physical tape drive across sequential DDs in a step.'
       },
       {
@@ -2370,7 +2352,7 @@
 //         SPACE=(CYL,(800,200),RLSE),
 //         DCB=(RECFM=FB,LRECL=200,BLKSIZE=0,BUFNO=40)`,
         answer: `1. <strong><span class="vr-syntax">FREE=CLOSE</span>:</strong> Releases the <code class="font-mono">DISP=OLD</code> enqueue the instant COBOL executes <code class="font-mono">CLOSE VSAMIN</code>, allowing CICS to resume online access while the batch step finishes downstream work.<br/>
-2. <strong>VSAM <code class="font-mono">AMP=('BUFND=60,BUFNI=10')</code> &amp; QSAM <code class="font-mono">BUFNO=40</code>:</strong> Slashes physical EXCP I/O wait time by up to 70%.`
+2. <strong>VSAM <code class="font-mono">AMP=('BUFND=60,BUFNI=10')</code> &amp; QSAM <code class="font-mono">BUFNO=40</code>:</strong> Can materially reduce I/O overhead when the workload is I/O-bound; measure the actual improvement.`
       },
       {
         id: 'scen-7',
@@ -2741,34 +2723,9 @@
     let deferredPwaPrompt = null;
 
     function initPwaEnvironment() {
-      const iconSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%233B6E5C'/%3E%3Crect x='36' y='36' width='440' height='440' rx='84' fill='%23F6F5F0'/%3E%3Ctext x='256' y='265' font-family='monospace' font-weight='800' font-size='150' text-anchor='middle' fill='%233B6E5C'%3E//JCL%3C/text%3E%3Ctext x='256' y='375' font-family='sans-serif' font-weight='700' font-size='56' text-anchor='middle' fill='%238C5E3C'%3E5-YR PRO%3C/text%3E%3C/svg%3E";
-      const manifestObj = {
-        name: "JCL 5-Yr Interview Mastery",
-        short_name: "JCL Mastery",
-        description: "Calm Editorial JCL 5-Year Interview Revision, 45 SRS Flashcards, 5-Q Mock Interview & Abend Lab by Nagraj Naik.",
-        start_url: ".",
-        display: "standalone",
-        background_color: "#F6F5F0",
-        theme_color: "#3B6E5C",
-        orientation: "portrait-primary",
-        icons: [
-          { src: iconSvg, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-          { src: iconSvg, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
-        ]
-      };
-      try {
-        const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
-        const manifestUrl = URL.createObjectURL(manifestBlob);
-        const linkEl = document.getElementById('pwaManifestLink');
-        if (linkEl) linkEl.setAttribute('href', manifestUrl);
-      } catch (e) {}
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+      window.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredPwaPrompt=event; });
     }
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPwaPrompt = e;
-    });
-
     function triggerPhoneAppInstall() {
       closeSettingsPopover();
       if (deferredPwaPrompt) {
@@ -2917,6 +2874,7 @@
         btn.style.color = active ? 'var(--accent-primary)' : 'var(--text-secondary)';
       });
 
+      const moduleMenu=document.getElementById('studyModuleMenu'); if(moduleMenu) moduleMenu.open=false;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -2968,6 +2926,7 @@
       if (icon) {
         icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
       }
+      const trigger=body.previousElementSibling; if(trigger) trigger.setAttribute('aria-expanded',String(!isHidden));
     }
 
     function expandCollapseAllNotes(expand) {
@@ -3413,7 +3372,8 @@
       renderAbendTable(q);
 
       status.classList.remove('hidden');
-      status.innerHTML = `Found <strong>${noteHits}</strong> Note Chunks, <strong>${fcMatches.length}</strong> Flashcards, <strong>${scenMatches.length}</strong> Production Scenarios, and <strong>${abendMatches.length}</strong> Abends matching "<code class="font-mono font-bold">${val}</code>".`;
+      status.classList.add('search-status');
+      status.textContent = `Found ${noteHits} note chunks, ${fcMatches.length} flashcards, ${scenMatches.length} production scenarios, and ${abendMatches.length} abends matching "${val}".`;
     }
 
     function clearGlobalSearch() {
@@ -3443,6 +3403,7 @@
       updateFontSizeUI(savedSize);
       loadScratchpads();
       switchTab('notes');
+      expandCollapseAllNotes(false);
       evaluateCondWidget();
       updateSrsSummary();
       filterFlashcards('ALL');
