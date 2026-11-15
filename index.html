@@ -58,10 +58,22 @@
   </script>
 <style>
     /* PROFESSIONAL STUDY-APP LAYOUT */
-    /* PRACTICE MODE: mobile-first, one surface visible at a time */
-    .practice-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;position:sticky;top:.5rem;z-index:5}
-    #practiceModeSelect{min-height:2.5rem;border:0;border-radius:.8rem;padding:.25rem .25rem;color:var(--text-primary);background:transparent;font:600 .9rem/1.2 "Plus Jakarta Sans",system-ui,sans-serif}
-    #practiceModeSelect:focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
+    /* PRACTICE MODE — custom touch dropdown, no native/system control */
+    .practice-mode-switch{position:relative;width:100%;z-index:20}
+    .practice-mode-bar{min-height:4.25rem}
+    .practice-mode-trigger{font-family:"Plus Jakarta Sans",system-ui,sans-serif;transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease}
+    .practice-mode-trigger:focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
+    .practice-mode-trigger[aria-expanded="true"]{border-color:var(--accent-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent-primary) 14%,transparent)}
+    .practice-mode-option{width:100%;display:flex;align-items:center;gap:.7rem;min-height:3rem;padding:.7rem .8rem;border:0;border-radius:.75rem;background:transparent;color:var(--text-primary);font:600 .88rem/1.2 "Plus Jakarta Sans",system-ui,sans-serif;text-align:left;cursor:pointer}
+    .practice-mode-option:hover,.practice-mode-option:focus-visible{background:var(--bg-subtle);outline:none}
+    .practice-mode-option.active{background:var(--accent-soft);color:var(--accent-primary)}
+    .practice-mode-option-icon{width:1.6rem;height:1.6rem;display:inline-flex;align-items:center;justify-content:center;border-radius:.5rem;background:var(--bg-surface);border:1px solid var(--border-subtle);flex:none}
+    @media(max-width:640px){
+      .practice-mode-bar{min-height:4rem;padding:.7rem .8rem}
+      .practice-mode-trigger{min-width:9rem;max-width:62%;min-height:2.75rem;padding:.55rem .75rem}
+      #practiceModeMenu{right:0;width:min(17rem,calc(100vw - 2rem))}
+    }
+
     .mcq-option{position:relative;display:flex;align-items:flex-start;gap:.15rem;min-height:3.25rem;transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .12s ease}
     .mcq-option.mcq-correct,.mcq-option[data-state="correct"]{background:#d9f3e6!important;border:2px solid #79c9a7!important;color:#245c4b!important;box-shadow:0 0 0 3px rgba(121,201,167,.16)!important}
     .mcq-option.mcq-wrong,.mcq-option[data-state="wrong"]{background:#f9dfdf!important;border:2px solid #e5a1a1!important;color:#7d3434!important;box-shadow:0 0 0 3px rgba(229,161,161,.14)!important}
@@ -1533,12 +1545,22 @@
          MODULE 3: ACTIVE RECALL FLASHCARDS (45 SENIOR 5-YR CARDS + SRS)
          ===================================================================== -->
 <section class="study-module hidden space-y-5" id="module-flashcards"><!-- Flashcard / MCQ workspace switch: only one practice surface is visible at a time. -->
-<div class="practice-mode-switch bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl px-3 py-2 shadow-2xs">
-<label for="practiceModeSelect" class="block text-xs font-semibold text-paper-muted dark:text-terminal-muted mb-1">Practice</label>
-<select id="practiceModeSelect" class="w-full bg-paper-subtle dark:bg-slate-800 text-sm font-semibold text-paper-text dark:text-terminal-text outline-none cursor-pointer" aria-label="Choose practice mode" onchange="setPracticeMode(this.value)">
-  <option value="flashcard">Flash card</option>
-  <option value="mcq">MCQ</option>
-</select>
+<div class="practice-mode-switch relative w-full" id="practiceModeControl">
+  <div class="practice-mode-bar flex items-center justify-between gap-3 w-full bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl px-4 py-3 shadow-2xs">
+    <span class="text-sm font-semibold text-paper-muted dark:text-terminal-muted">Practice</span>
+    <button type="button" id="practiceModeTrigger" class="practice-mode-trigger inline-flex items-center justify-between gap-3 min-w-[9.5rem] max-w-[70%] min-h-11 px-4 py-2 rounded-xl bg-paper-subtle dark:bg-slate-800 border border-paper-border dark:border-terminal-border text-sm font-semibold text-paper-text dark:text-terminal-text cursor-pointer" aria-haspopup="listbox" aria-expanded="false" aria-controls="practiceModeMenu" onclick="togglePracticeModeMenu()">
+      <span id="practiceModeValue">Flash card</span>
+      <span class="text-base leading-none" aria-hidden="true">⌄</span>
+    </button>
+  </div>
+  <div id="practiceModeMenu" class="hidden absolute right-0 top-full mt-2 z-50 w-[min(18rem,calc(100vw-3rem))] rounded-2xl bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border p-1.5 shadow-xl" role="listbox" aria-label="Practice mode">
+    <button type="button" class="practice-mode-option active" id="practiceModeOptionFlashcard" role="option" aria-selected="true" onclick="setPracticeMode('flashcard');closePracticeModeMenu()">
+      <span class="practice-mode-option-icon" aria-hidden="true">▣</span><span>Flash card</span>
+    </button>
+    <button type="button" class="practice-mode-option" id="practiceModeOptionMcq" role="option" aria-selected="false" onclick="setPracticeMode('mcq');closePracticeModeMenu()">
+      <span class="practice-mode-option-icon" aria-hidden="true">✓</span><span>MCQ</span>
+    </button>
+  </div>
 </div>
 <div id="flashcardWorkspace">
 
@@ -1665,7 +1687,7 @@
 </div>
 <div class="mt-4 pt-4 border-t border-paper-border dark:border-terminal-border">
 <p class="font-heading font-semibold text-base sm:text-lg leading-relaxed" id="mcqQuestion">JOBLIB is primarily used to:</p>
-<div class="grid gap-2 mt-4" id="mcqOptions"><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">A</span>Define a job-level program library searched before the normal system search</button><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">B</span>Define a SYSOUT class</button><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">C</span>Define a GDG base</button><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">D</span>Define a COBOL compile option</button></div>
+<div class="grid gap-2 mt-4" id="mcqOptions"><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="mcq-choice-label inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">A</span>Define a job-level program library searched before the normal system search</button><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="mcq-choice-label inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">B</span>Define a SYSOUT class</button><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="mcq-choice-label inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">C</span>Define a GDG base</button><button type="button" class="mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed"><span class="mcq-choice-label inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold">D</span>Define a COBOL compile option</button></div>
 <div class="hidden mt-4 p-3 rounded-xl border border-emerald-300/70 bg-emerald-50 dark:bg-emerald-950/20" id="mcqExplanation"><div class="text-xs font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">Why</div><p class="text-sm leading-relaxed mt-1" id="mcqExplanationText"></p><p class="text-[11px] text-paper-muted dark:text-terminal-muted mt-2" id="mcqSource"></p></div>
 <div class="flex items-center justify-between gap-2 mt-4"><button class="px-3 py-2 rounded-xl border border-paper-border dark:border-terminal-border text-xs font-semibold cursor-pointer" onclick="previousMcq()">← Previous</button><button class="px-3 py-2 rounded-xl bg-paper-subtle dark:bg-slate-800 text-xs font-semibold cursor-pointer" onclick="resetMcq()">Reset</button><button class="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold cursor-pointer" onclick="nextMcq()">Next →</button></div>
 </div></div>
@@ -2423,20 +2445,48 @@
       { id:69, q:'The safest JES2/JES3 interview statement is:', options:['Both perform core job-entry functions, but their architectures and allocation/scheduling responsibilities differ','JES2 only handles output','JES3 does not process JCL','They are identical'], answer:0, explanation:'IBM describes both as job entry subsystems with similar core functions but different architectures; avoid oversimplified allocation claims.', source:'IBM z/OS concepts — JES2 compared to JES3' }
     ];
     let mcqIndex=0, mcqScore=0, mcqAttempted=0, mcqAnswered=false;
+    window.togglePracticeModeMenu = function togglePracticeModeMenu(){
+      const menu=document.getElementById('practiceModeMenu');
+      const trigger=document.getElementById('practiceModeTrigger');
+      if(!menu||!trigger)return;
+      const open=menu.classList.toggle('hidden')===false;
+      trigger.setAttribute('aria-expanded',String(open));
+    };
+    window.closePracticeModeMenu = function closePracticeModeMenu(){
+      const menu=document.getElementById('practiceModeMenu');
+      const trigger=document.getElementById('practiceModeTrigger');
+      if(menu)menu.classList.add('hidden');
+      if(trigger)trigger.setAttribute('aria-expanded','false');
+    };
+    document.addEventListener('click',(event)=>{
+      const control=document.getElementById('practiceModeControl');
+      if(control && !control.contains(event.target)) closePracticeModeMenu();
+    });
+    document.addEventListener('keydown',(event)=>{
+      if(event.key==='Escape') closePracticeModeMenu();
+    });
+
     window.setPracticeMode = function setPracticeMode(mode){
       const flash=document.getElementById('flashcardWorkspace');
       const mcq=document.getElementById('mcqWorkspace');
-      const select=document.getElementById('practiceModeSelect');
       const isMcq=mode==='mcq';
       if(flash)flash.classList.toggle('hidden',isMcq);
       if(mcq)mcq.classList.toggle('hidden',!isMcq);
       if(mcq)mcq.setAttribute('aria-hidden',String(!isMcq));
       if(flash)flash.setAttribute('aria-hidden',String(isMcq));
-      if(select)select.value=isMcq?'mcq':'flashcard';
+      const value=document.getElementById('practiceModeValue');
+      const trigger=document.getElementById('practiceModeTrigger');
+      const flashOption=document.getElementById('practiceModeOptionFlashcard');
+      const mcqOption=document.getElementById('practiceModeOptionMcq');
+      if(value)value.textContent=isMcq?'MCQ':'Flash card';
+      if(trigger)trigger.setAttribute('aria-expanded','false');
+      if(flashOption){flashOption.classList.toggle('active',!isMcq);flashOption.setAttribute('aria-selected',String(!isMcq));}
+      if(mcqOption){mcqOption.classList.toggle('active',isMcq);mcqOption.setAttribute('aria-selected',String(isMcq));}
+      closePracticeModeMenu();
       if(isMcq){
-        if(typeof window.renderMcq==='function') window.renderMcq();
+        requestAnimationFrame(()=>window.renderMcq?.());
       }else{
-        if(typeof renderCurrentFlashcard==='function') renderCurrentFlashcard();
+        requestAnimationFrame(()=>typeof renderCurrentFlashcard==='function'&&renderCurrentFlashcard());
       }
     };
 
@@ -3151,7 +3201,7 @@
 
       // Dynamic modules are rendered on entry as well as initial load.
       // This prevents stale/empty panels after navigation or restored browser state.
-      if (tabId === 'flashcards') { updateSrsSummary(); applyFlashcardFilters(); requestAnimationFrame(()=>{ const active=document.getElementById('practiceModeSelect')?.value==='mcq'; setPracticeMode(active?'mcq':'flashcard'); }); }
+      if (tabId === 'flashcards') { updateSrsSummary(); applyFlashcardFilters(); requestAnimationFrame(()=>{ const active=document.getElementById('mcqWorkspace')?.classList.contains('hidden')===false; setPracticeMode(active?'mcq':'flashcard'); }); }
       if (tabId === 'scenarios') renderScenarios('');
       if (tabId === 'lab') {
         renderAbendTable(document.getElementById('abendFilterInput')?.value || '');
@@ -3742,8 +3792,7 @@
       currentFcStatus = 'ALL_STATUS';
       filterFlashcards('ALL');
       setPracticeMode('flashcard');
-      // Explicit first-paint initialization: both the SRS card and MCQ must be
-      // rendered after the DOM and data repositories are fully initialized.
+      // Materialize both practice surfaces after the DOM is ready.
       applyFlashcardFilters();
       window.renderMcq?.();
       requestAnimationFrame(()=>window.renderMcq?.());
