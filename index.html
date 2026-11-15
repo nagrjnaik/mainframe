@@ -2413,7 +2413,7 @@
       { id:68, q:'An initiator is:', options:['A system function/address space that starts and runs selected batch jobs','A catalog','A compiler','An output writer only'], answer:0, explanation:'An initiator starts a batch job and establishes the environment required to run it.', source:'IBM z/OS concepts — batch processing' },
       { id:69, q:'The safest JES2/JES3 interview statement is:', options:['Both perform core job-entry functions, but their architectures and allocation/scheduling responsibilities differ','JES2 only handles output','JES3 does not process JCL','They are identical'], answer:0, explanation:'IBM describes both as job entry subsystems with similar core functions but different architectures; avoid oversimplified allocation claims.', source:'IBM z/OS concepts — JES2 compared to JES3' }
     ];
-    let mcqIndex=0, mcqScore=0, mcqAnswered=false;
+    let mcqIndex=0, mcqScore=0, mcqAttempted=0, mcqAnswered=false;
     window.setPracticeMode = function setPracticeMode(mode){
       const flash=document.getElementById('flashcardWorkspace');
       const mcq=document.getElementById('mcqWorkspace');
@@ -2443,7 +2443,7 @@
       if(!q||!question||!number||!box)return false;
       mcqAnswered=false;
       number.textContent='Question '+(mcqIndex+1)+' of '+window.VERIFIED_MCQ_DATA.length;
-      if(correctEl) correctEl.textContent='Correct '+mcqScore; if(attemptedEl) attemptedEl.textContent='Attempted '+(mcqIndex + (mcqAnswered ? 1 : 0));
+      if(correctEl) correctEl.textContent='Correct '+mcqScore; if(attemptedEl) attemptedEl.textContent='Attempted '+mcqAttempted;
       question.textContent=q.q;
       if(explanation) explanation.classList.add('hidden');
       if(explanationText) explanationText.textContent='';
@@ -2463,10 +2463,10 @@
       return true;
     };
 
-    function answerMcq(choice){if(mcqAnswered)return;mcqAnswered=true;const q=VERIFIED_MCQ_DATA[mcqIndex];Array.from(document.querySelectorAll('.mcq-option')).forEach((b,i)=>{b.disabled=true;b.classList.remove('mcq-correct','mcq-wrong');b.setAttribute('aria-pressed','false');const label=b.querySelector('.mcq-choice-label');if(i===q.answer){b.classList.add('mcq-correct');b.setAttribute('aria-label','Correct answer: '+q.options[i]);if(label)label.textContent=String.fromCharCode(65+i)}if(i===choice&&choice!==q.answer){b.classList.add('mcq-wrong');b.setAttribute('aria-label','Incorrect answer: '+q.options[i])}});if(choice===q.answer)mcqScore++;const correctEl=document.getElementById('mcqCorrect');const attemptedEl=document.getElementById('mcqAttempted');if(correctEl)correctEl.textContent='Correct '+mcqScore;if(attemptedEl)attemptedEl.textContent='Attempted '+(mcqIndex+1);const explanationText=document.getElementById('mcqExplanationText');const explanation=document.getElementById('mcqExplanation');if(explanationText)explanationText.textContent=q.explanation;if(explanation)explanation.classList.remove('hidden')}
+    function answerMcq(choice){if(mcqAnswered)return;mcqAnswered=true;const q=VERIFIED_MCQ_DATA[mcqIndex];Array.from(document.querySelectorAll('.mcq-option')).forEach((b,i)=>{b.disabled=true;b.classList.remove('mcq-correct','mcq-wrong');b.setAttribute('aria-pressed','false');const label=b.querySelector('.mcq-choice-label');if(i===q.answer){b.classList.add('mcq-correct');b.setAttribute('aria-label','Correct answer: '+q.options[i]);if(label)label.textContent=String.fromCharCode(65+i)}if(i===choice&&choice!==q.answer){b.classList.add('mcq-wrong');b.setAttribute('aria-label','Incorrect answer: '+q.options[i])}});mcqAttempted++;if(choice===q.answer)mcqScore++;const correctEl=document.getElementById('mcqCorrect');const attemptedEl=document.getElementById('mcqAttempted');if(correctEl)correctEl.textContent='Correct '+mcqScore;if(attemptedEl)attemptedEl.textContent='Attempted '+mcqAttempted;const explanationText=document.getElementById('mcqExplanationText');const explanation=document.getElementById('mcqExplanation');if(explanationText)explanationText.textContent=q.explanation;if(explanation)explanation.classList.remove('hidden')}
     function nextMcq(){mcqIndex=(mcqIndex+1)%VERIFIED_MCQ_DATA.length;renderMcq()}
     function previousMcq(){mcqIndex=(mcqIndex-1+VERIFIED_MCQ_DATA.length)%VERIFIED_MCQ_DATA.length;renderMcq()}
-    function resetMcq(){mcqIndex=0;mcqScore=0;renderMcq()}
+    function resetMcq(){mcqIndex=0;mcqScore=0;mcqAttempted=0;renderMcq()}
 
     /*************************************************************************
      * 2. DATA REPOSITORY: 10 REAL-TIME 5-YR PRODUCTION SCENARIOS
