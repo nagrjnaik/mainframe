@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <title>COBOL Mastery | Mainframe Study App</title>
 <meta name="theme-color" content="#3B6E5C">
+<meta name="application-name" content="COBOL Mastery">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./cobol-manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -333,5 +337,6 @@ document.getElementById('font').onchange=function(){document.documentElement.dat
 document.getElementById('search').oninput=function(){const q=this.value.toLowerCase();document.querySelectorAll('.module').forEach(function(b){b.classList.toggle('hidden',!b.textContent.toLowerCase().includes(q))})};
 const savedTheme=localStorage.getItem('cobol-theme');const savedFont=localStorage.getItem('cobol-font');if(savedTheme){document.documentElement.dataset.theme=savedTheme;document.getElementById('theme').value=savedTheme}if(savedFont){document.documentElement.dataset.font=savedFont;document.getElementById('font').value=savedFont}
 renderModules();renderNotes();renderFC();renderMCQ();renderScenarios('');renderDiag('');
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./cobol-sw.js').catch(function(){});});}
 </script>
 </body></html>
