@@ -1920,9 +1920,8 @@
 <span>Visuals</span>
 </button>
 <button class="mobile-nav-btn relative flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="flashcards" onclick="switchTab('flashcards')">
-<span>🃏</span>
-<span>Cards</span>
-<span class="absolute -top-0.5 right-0.5 px-1 rounded-full text-[9px] font-bold" id="mobileDueBadge" style="background-color: var(--accent-soft); color: var(--accent-primary);">45</span>
+<span aria-hidden="true">🧠</span>
+<span>Quiz</span>
 </button>
 <button class="mobile-nav-btn flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="scenarios" onclick="switchTab('scenarios')">
 <span>🛠️</span>
@@ -3047,6 +3046,7 @@
         const active = btn.getAttribute('data-tab') === tabId;
         btn.style.backgroundColor = active ? 'var(--accent-soft)' : 'transparent';
         btn.style.color = active ? 'var(--accent-primary)' : 'var(--text-secondary)';
+        btn.setAttribute('aria-current', active ? 'page' : 'false');
       });
 
       const moduleMenu=document.getElementById('studyModuleMenu'); if(moduleMenu) moduleMenu.open=false;
@@ -3227,7 +3227,7 @@
 
       const remaining = total - mastered;
       document.getElementById('desktopDueBadge').textContent = remaining;
-      document.getElementById('mobileDueBadge').textContent = remaining;
+
     }
 
     function renderCurrentFlashcard() {
@@ -3588,6 +3588,10 @@
       evaluateCondWidget();
       updateSrsSummary();
       filterFlashcards('ALL');
+      // Explicit first-paint initialization: both the SRS card and MCQ must be
+      // rendered after the DOM and data repositories are fully initialized.
+      applyFlashcardFilters();
+      renderMcq();
       renderScenarios();
       renderAbendTable();
       selectUtilityTab('joinkeys');
