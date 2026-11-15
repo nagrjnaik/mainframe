@@ -1849,7 +1849,7 @@
 <div class="mt-4 bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl p-4 sm:p-5 shadow-2xs" id="verifiedMcqPanel">
 <div class="flex flex-wrap items-center justify-between gap-3">
 <div><div class="flex items-center gap-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-xl" style="background:var(--accent-soft);color:var(--accent-primary);">✓</span><h2 class="font-heading font-bold text-lg">60+ Verified JCL MCQs</h2></div><p class="text-xs text-paper-muted dark:text-terminal-muted mt-1">Detailed practice with explanations and IBM-oriented source traceability.</p></div>
-<div class="flex items-center gap-2 text-xs font-semibold"><span id="mcqNumber">Question 1 of 69</span><span class="px-2 py-1 rounded-full font-bold bg-paper-subtle dark:bg-slate-800" id="mcqScore">Correct 0 · Attempted 0</span></div>
+<div class="flex items-center gap-2 text-xs font-semibold"><span id="mcqNumber">Question 1 of 69</span><span class="flex items-center gap-1.5"><span class="px-2 py-1 rounded-full font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300" id="mcqCorrect">Correct 0</span><span class="px-2 py-1 rounded-full font-bold bg-paper-subtle dark:bg-slate-800" id="mcqAttempted">Attempted 0</span></span></div>
 </div>
 <div class="mt-4 pt-4 border-t border-paper-border dark:border-terminal-border">
 <p class="font-heading font-semibold text-base sm:text-lg leading-relaxed" id="mcqQuestion">JOBLIB is primarily used to:</p>
@@ -1933,31 +1933,27 @@
 </section>
 </main>
 <!-- ==================== STICKY BOTTOM MOBILE NAVIGATION BAR ==================== -->
-<nav aria-label="Mobile Navigation" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-paper-surface/95 backdrop-blur-md border-t border-paper-border px-1 py-1.5 flex items-center justify-around shadow-lg">
-<button class="mobile-nav-btn flex-1 min-w-0 flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="notes" onclick="switchTab('notes')">
-<span>📖</span>
-<span>Notes</span>
+<nav aria-label="Mobile Navigation" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-paper-surface/95 backdrop-blur-md border-t border-paper-border shadow-lg">
+<div class="grid grid-cols-6 items-stretch w-full px-1 py-1.5 gap-0">
+<button class="mobile-nav-btn min-w-0 w-full h-12 flex flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] leading-tight font-semibold transition cursor-pointer" data-tab="notes" onclick="switchTab('notes')">
+<span class="h-5 w-6 flex items-center justify-center text-base leading-none" aria-hidden="true">📖</span><span class="block w-full truncate text-center">Notes</span>
 </button>
-<button class="mobile-nav-btn flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="mock" onclick="switchTab('mock')">
-<span>🎤</span>
-<span>5-Q Mock</span>
+<button class="mobile-nav-btn min-w-0 w-full h-12 flex flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] leading-tight font-semibold transition cursor-pointer" data-tab="mock" onclick="switchTab('mock')">
+<span class="h-5 w-6 flex items-center justify-center text-base leading-none" aria-hidden="true">🎤</span><span class="block w-full truncate text-center">5-Q Mock</span>
 </button>
-<button class="mobile-nav-btn flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="mnemonics" onclick="switchTab('mnemonics')">
-<span>⚖️</span>
-<span>Visuals</span>
+<button class="mobile-nav-btn min-w-0 w-full h-12 flex flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] leading-tight font-semibold transition cursor-pointer" data-tab="mnemonics" onclick="switchTab('mnemonics')">
+<span class="h-5 w-6 flex items-center justify-center text-base leading-none" aria-hidden="true">⚖️</span><span class="block w-full truncate text-center">Visuals</span>
 </button>
-<button class="mobile-nav-btn relative flex-1 min-w-0 flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="flashcards" onclick="switchTab('flashcards')">
-<span aria-hidden="true">🧠</span>
-<span>Quiz</span>
+<button class="mobile-nav-btn min-w-0 w-full h-12 flex flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] leading-tight font-semibold transition cursor-pointer" data-tab="flashcards" onclick="switchTab('flashcards')">
+<span class="h-5 w-6 flex items-center justify-center text-base leading-none" aria-hidden="true">🧠</span><span class="block w-full truncate text-center">Quiz</span>
 </button>
-<button class="mobile-nav-btn flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="scenarios" onclick="switchTab('scenarios')">
-<span>🛠️</span>
-<span>Cases</span>
+<button class="mobile-nav-btn min-w-0 w-full h-12 flex flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] leading-tight font-semibold transition cursor-pointer" data-tab="scenarios" onclick="switchTab('scenarios')">
+<span class="h-5 w-6 flex items-center justify-center text-base leading-none" aria-hidden="true">🛠️</span><span class="block w-full truncate text-center">Cases</span>
 </button>
-<button class="mobile-nav-btn flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-semibold transition cursor-pointer" data-tab="lab" onclick="switchTab('lab')">
-<span>🚨</span>
-<span>Lab</span>
+<button class="mobile-nav-btn min-w-0 w-full h-12 flex flex-col items-center justify-center gap-0.5 rounded-xl text-[10px] leading-tight font-semibold transition cursor-pointer" data-tab="lab" onclick="switchTab('lab')">
+<span class="h-5 w-6 flex items-center justify-center text-base leading-none" aria-hidden="true">🚨</span><span class="block w-full truncate text-center">Lab</span>
 </button>
+</div>
 </nav>
 <!-- ==================== INSTALL AS PHONE APP MODAL GUIDE ==================== -->
 <div class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" id="installAppGuideModal" onclick="closeInstallAppModal(event)">
@@ -2410,7 +2406,7 @@
       if(!q||!question||!number||!score||!box)return false;
       mcqAnswered=false;
       number.textContent='Question '+(mcqIndex+1)+' of '+window.VERIFIED_MCQ_DATA.length;
-      score.textContent='Correct '+mcqScore+' · Attempted '+(mcqIndex + (mcqAnswered ? 1 : 0));
+      const correctEl=document.getElementById('mcqCorrect'); const attemptedEl=document.getElementById('mcqAttempted'); if(correctEl) correctEl.textContent='Correct '+mcqScore; if(attemptedEl) attemptedEl.textContent='Attempted '+(mcqIndex + (mcqAnswered ? 1 : 0));
       question.textContent=q.q;
       if(explanation) explanation.classList.add('hidden');
       if(explanationText) explanationText.textContent='';
@@ -2430,7 +2426,7 @@
       return true;
     };
 
-    function answerMcq(choice){if(mcqAnswered)return;mcqAnswered=true;const q=VERIFIED_MCQ_DATA[mcqIndex];Array.from(document.querySelectorAll('.mcq-option')).forEach((b,i)=>{b.disabled=true;if(i===q.answer)b.classList.add('border-emerald-700','bg-emerald-600','text-white','dark:bg-emerald-700');if(i===choice&&choice!==q.answer)b.classList.add('border-red-700','bg-red-600','text-white','dark:bg-red-700')});if(choice===q.answer)mcqScore++;document.getElementById('mcqScore').textContent='Correct '+mcqScore+' · Attempted '+(mcqIndex+1);document.getElementById('mcqExplanationText').textContent=q.explanation;document.getElementById('mcqExplanation').classList.remove('hidden')}
+    function answerMcq(choice){if(mcqAnswered)return;mcqAnswered=true;const q=VERIFIED_MCQ_DATA[mcqIndex];Array.from(document.querySelectorAll('.mcq-option')).forEach((b,i)=>{b.disabled=true;if(i===q.answer)b.classList.add('border-emerald-300','bg-emerald-100','text-emerald-900','dark:border-emerald-700','dark:bg-emerald-900/30','dark:text-emerald-200');if(i===choice&&choice!==q.answer)b.classList.add('border-red-300','bg-red-100','text-red-900','dark:border-red-700','dark:bg-red-900/30','dark:text-red-200')});if(choice===q.answer)mcqScore++;const correctEl=document.getElementById('mcqCorrect');const attemptedEl=document.getElementById('mcqAttempted');if(correctEl)correctEl.textContent='Correct '+mcqScore;if(attemptedEl)attemptedEl.textContent='Attempted '+(mcqIndex+1);document.getElementById('mcqExplanationText').textContent=q.explanation;document.getElementById('mcqExplanation').classList.remove('hidden')}
     function nextMcq(){mcqIndex=(mcqIndex+1)%VERIFIED_MCQ_DATA.length;renderMcq()}
     function previousMcq(){mcqIndex=(mcqIndex-1+VERIFIED_MCQ_DATA.length)%VERIFIED_MCQ_DATA.length;renderMcq()}
     function resetMcq(){mcqIndex=0;mcqScore=0;renderMcq()}
