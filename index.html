@@ -591,7 +591,7 @@
 <div class="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-paper-subtle border border-paper-border">
 <div>
 <div class="font-heading font-semibold text-xs text-paper-text">Developed by Nagraj Naik</div>
-<div class="text-[10px] text-paper-muted">JCL Interview Mastery</div>
+<div class="text-[10px] text-paper-muted">JCL Mastery</div>
 </div>
 <a aria-label="Nagraj Naik LinkedIn Profile" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-semibold text-xs text-white bg-[#0A66C2] hover:bg-[#004182] transition shadow-2xs shrink-0" href="https://www.linkedin.com/in/nagraj-naik-314710154" rel="noopener noreferrer" target="_blank" title="Connect with Nagraj Naik on LinkedIn">
 <svg aria-hidden="true" class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
@@ -1563,6 +1563,7 @@
   </div>
 </div>
 <div id="flashcardWorkspace">
+<div id="flashcardDeckWorkspace">
 
 <!-- Top Stats & Deck Controls -->
 <div class="bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl p-4 sm:p-5 space-y-4 shadow-2xs">
@@ -1638,7 +1639,7 @@
 <!-- BACK OF CARD -->
 <div class="backface-hidden rotate-y-180 absolute inset-0 bg-paper-surface dark:bg-terminal-surface border-2 border-amber-500/80 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-md overflow-y-auto">
 <div class="flex items-center justify-between gap-2 border-b border-paper-border dark:border-terminal-border pb-2">
-<span class="px-2.5 py-0.5 rounded-lg text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">INTERVIEW ANSWER</span>
+<span class="px-2.5 py-0.5 rounded-lg text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">ANSWER</span>
 <span class="text-xs text-paper-muted dark:text-terminal-muted font-mono">TAP TO FLIP BACK</span>
 </div>
 <div class="my-auto py-3 text-sm sm:text-base space-y-2 leading-relaxed" id="fcAnswerText">
@@ -1678,6 +1679,7 @@
 </div>
 
 
+</div>
 </div>
 <div id="mcqWorkspace" class="hidden" aria-hidden="true">
 <div class="mt-4 bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl p-4 sm:p-5 shadow-2xs" id="verifiedMcqPanel">
@@ -2051,7 +2053,7 @@
 <!-- ==================== APPLICATION JAVASCRIPT ==================== -->
 <script>
     /*************************************************************************
-     * 1. DATA REPOSITORY: 45 SENIOR 5-YR JCL FLASHCARDS
+     * 1. DATA REPOSITORY: 45 SENIOR  JCL FLASHCARDS
      *************************************************************************/
     const FLASHCARDS_DATA = [
       {
@@ -2467,14 +2469,14 @@
     });
 
     window.setPracticeMode = function setPracticeMode(mode){
-      const flash=document.getElementById('flashcardWorkspace');
+      const deck=document.getElementById('flashcardDeckWorkspace');
       const mcq=document.getElementById('mcqWorkspace');
       const isMcq=mode==='mcq';
-      if(flash){
-        flash.classList.toggle('hidden',isMcq);
-        flash.hidden=isMcq;
-        flash.style.display=isMcq?'none':'block';
-        flash.setAttribute('aria-hidden',String(isMcq));
+      if(deck){
+        deck.classList.toggle('hidden',isMcq);
+        deck.hidden=isMcq;
+        deck.style.display=isMcq?'none':'block';
+        deck.setAttribute('aria-hidden',String(isMcq));
       }
       if(mcq){
         mcq.classList.toggle('hidden',!isMcq);
@@ -2838,7 +2840,7 @@
 
     const UTILITIES_DATA = {
       joinkeys: {
-        title: 'DFSORT JOINKEYS — Two-File Match/Merge (The #1 5-Yr Sort Question)',
+        title: 'DFSORT JOINKEYS — Two-File Match/Merge (The #1  Sort Question)',
         desc: 'Replaces complex two-file match-merge COBOL programs! Joins File 1 (SORTJNF1) and File 2 (SORTJNF2) on specified keys and builds a combined output record via REFORMAT.',
         code: `//JOINSTEP EXEC PGM=SORT,REGION=0M
 //SYSOUT   DD SYSOUT=*
@@ -2861,7 +2863,7 @@
       },
       dfsort: {
         title: 'DFSORT Power Features — Deduplication (XSUM), FB-to-VB, & Multi-Split',
-        desc: 'High-yield DFSORT patterns tested in 5-year interviews: XSUM duplicate capture, IFTHEN conditional overlay, and FTOV/VTOF record format conversion.',
+        desc: 'High-yield DFSORT patterns tested in  interviews: XSUM duplicate capture, IFTHEN conditional overlay, and FTOV/VTOF record format conversion.',
         code: `//SORTADV  EXEC PGM=SORT,REGION=0M
 //SYSOUT   DD SYSOUT=*
 //SORTIN   DD DSN=PROD.INPUT.FB80,DISP=SHR
@@ -3347,7 +3349,7 @@
 `//STEP010  EXEC PGM=SORT,REGION=0M,PARM='MSGPRT=CRITICAL',             00010000
 //              TIME=(0,30)  <-- ERROR! STARTS IN COLUMN 17!           00020000`;
         expEl.className = 'text-xs bg-red-50 dark:bg-red-950/40 text-red-900 dark:text-red-200 p-2.5 rounded-xl border border-red-300/60';
-        expEl.innerHTML = '<strong>5-Yr Continuation Trap:</strong> Because <code class="font-bold">TIME=(0,30)</code> begins in <strong>Column 17</strong> instead of Columns 4–16, JES treats it as a comment or throws <code class="font-bold">IEFC605I / IEFC621I EXPECTED CONTINUATION NOT RECEIVED</code>!';
+        expEl.innerHTML = '<strong> Continuation Trap:</strong> Because <code class="font-bold">TIME=(0,30)</code> begins in <strong>Column 17</strong> instead of Columns 4–16, JES treats it as a comment or throws <code class="font-bold">IEFC605I / IEFC621I EXPECTED CONTINUATION NOT RECEIVED</code>!';
       }
     }
 
