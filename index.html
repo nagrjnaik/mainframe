@@ -596,7 +596,7 @@
 <!-- Category Filter Pills for 12 Note Cards -->
 <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-paper-border" id="noteCategoryPills">
 <button class="note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="ALL" onclick="filterNoteChunks('ALL')" style="background-color: var(--accent-primary); color: #fff;">All 12</button>
-<button class="note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="core" onclick="filterNoteChunks('core')">Core · 1–5</button>
+<button class="note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="core" onclick="filterNoteChunks('core')">Core · 1–4</button>
 <button class="note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="tuning" onclick="filterNoteChunks('tuning')">Tuning · 5–8</button>
 <button class="note-cat-btn inline-flex items-center justify-center min-h-9 px-4 py-2 rounded-full text-xs font-medium bg-paper-subtle text-paper-muted whitespace-nowrap cursor-pointer" data-notecat="advanced" onclick="filterNoteChunks('advanced')">Advanced · 9–12</button>
 </div>
@@ -705,7 +705,7 @@
 <details class="senior-notes"><summary><span>★ Senior Missing Notes — JES2 / JOB lifecycle</span><span class="text-[10px] font-medium opacity-70">Senior note</span></summary><div class="senior-notes-content"><p class="text-xs sm:text-sm">Missing senior point: TYPRUN=SCAN validates JCL through the converter; it does not execute the job or perform all interpreter-time validation. Also remember JES conversion errors (IEFC*) and interpreter/allocation errors (IEF*) are different diagnostic layers.</p><div class="text-[11px] font-semibold uppercase tracking-wider text-paper-muted">Short JCL example</div><div class="jcl-pre-wrapper p-2.5"><pre class="font-mono text-xs">//CHKJCL  JOB ("ACCT"),CLASS=A,MSGCLASS=X,TYPRUN=SCAN
 //STEP1   EXEC PGM=IEFBR14</pre></div></div></details></div></article>
 <!-- CHUNK 2: JOB & EXEC Statement Deep Dive -->
-<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="core"">
+<article class="note-chunk bg-paper-surface dark:bg-terminal-surface border border-paper-border dark:border-terminal-border rounded-2xl overflow-visible shadow-2xs" data-chunkcat="tuning">
 <button class="w-full px-4 sm:px-6 py-4 flex items-center justify-between text-left bg-paper-subtle/60 dark:bg-terminal-subtle/60 hover:bg-paper-subtle dark:hover:bg-slate-800/70 transition cursor-pointer" onclick="toggleChunk('chunk-2')">
 <div class="flex items-center gap-3">
 <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">02</span>
