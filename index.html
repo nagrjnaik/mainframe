@@ -74,7 +74,10 @@
       #practiceModeMenu{right:0;width:min(17rem,calc(100vw - 2rem))}
     }
 
-    .mcq-option{position:relative;display:flex;align-items:flex-start;gap:.15rem;min-height:3.25rem;transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .12s ease}
+    .mcq-option{position:relative;display:grid;grid-template-columns:2rem minmax(0,1fr);align-items:center;column-gap:.75rem;min-height:3.25rem;transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .12s ease}
+    .mcq-option .mcq-choice-label{width:2rem!important;height:2rem!important;min-width:2rem!important;margin:0!important;align-self:center}
+    .mcq-option{overflow-wrap:anywhere}
+    @media(max-width:420px){.mcq-option{grid-template-columns:1.9rem minmax(0,1fr);column-gap:.65rem}.mcq-option .mcq-choice-label{width:1.9rem!important;height:1.9rem!important;min-width:1.9rem!important}}
     .mcq-option.mcq-correct,.mcq-option[data-state="correct"]{background:#d9f3e6!important;border:2px solid #79c9a7!important;color:#245c4b!important;box-shadow:0 0 0 3px rgba(121,201,167,.16)!important}
     .mcq-option.mcq-wrong,.mcq-option[data-state="wrong"]{background:#f9dfdf!important;border:2px solid #e5a1a1!important;color:#7d3434!important;box-shadow:0 0 0 3px rgba(229,161,161,.14)!important}
     .mcq-option.mcq-correct .mcq-choice-label,.mcq-option[data-state="correct"] .mcq-choice-label{background:#b9e6d1!important;border:1px solid #79c9a7!important;color:#245c4b!important}
@@ -2535,7 +2538,7 @@
         b.type='button';
         b.className='mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed'; b.dataset.state='neutral'; b.setAttribute('aria-pressed','false');
         const label=document.createElement('span');
-        label.className='mcq-choice-label inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold';
+        label.className='mcq-choice-label inline-flex items-center justify-center rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border text-xs font-bold';
         label.textContent=String.fromCharCode(65+i);
         b.append(label,document.createTextNode(option));
         b.onclick=()=>answerMcq(i);
