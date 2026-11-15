@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en" data-theme="sage" data-font="sans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<title>COBOL Mastery | Mainframe Study App</title>
+<meta name="theme-color" content="#3B6E5C">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Lexend:wght@300;400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F0;--surface:#FCFBF9;--subtle:#EFECE6;--text:#2B302C;--muted:#5C645E;--border:#E5E2DC;--accent:#3B6E5C;--soft:#E6F0EC;--warm:#8C5E3C;--warmbg:#F7EFE8;--code:#1E222A}
+html[data-theme=sepia]{--bg:#F3EAD8;--surface:#FAF5EB;--subtle:#EAE0CC;--text:#382E24;--muted:#6E5D4F;--border:#E2D5C1;--accent:#7C4D2B;--soft:#EFE3D2;--warm:#8C5230;--warmbg:#F4E8D8}
+html[data-theme=nord]{--bg:#1E222A;--surface:#262B35;--subtle:#1A1E25;--text:#DEE3EA;--muted:#9AA5B5;--border:#333A47;--accent:#88C0D0;--soft:rgba(136,192,208,.14);--warm:#EBCB8B;--warmbg:rgba(235,203,139,.12)}
+html[data-font=serif] body{font-family:Literata,Georgia,serif}html[data-font=lexend] body{font-family:Lexend,system-ui,sans-serif}html[data-font=sans] body{font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;padding-bottom:5.5rem;transition:.25s}button,input{font:inherit}button{cursor:pointer}code,pre{font-family:'Fira Code',monospace}h1,h2,h3,h4{font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-.02em;line-height:1.35}.wrap{max-width:1100px;margin:auto;padding:0 18px}.stream{max-width:920px;margin:auto}.header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}.header-inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:11px}.brand-mark{width:40px;height:40px;border-radius:12px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:800;font-family:'Fira Code'}.brand small{display:block;color:var(--muted);font-size:11px}.controls{display:flex;gap:7px}.iconbtn{width:38px;height:38px;border:1px solid var(--border);background:var(--surface);border-radius:11px;color:var(--text)}.hero{padding:42px 0 25px}.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--accent)}.hero h1{font-size:clamp(2rem,6vw,3.5rem);margin:8px 0}.hero p{max-width:750px;color:var(--muted);margin:0}.tabs{display:flex;gap:7px;overflow:auto;padding:8px 0 14px;scrollbar-width:none}.tab{white-space:nowrap;border:1px solid var(--border);background:var(--surface);color:var(--muted);padding:9px 14px;border-radius:999px;font-size:13px;font-weight:700}.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 3px 18px rgba(0,0,0,.025)}.module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.module{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:14px;text-align:left;color:var(--text);min-height:92px}.module:hover{border-color:var(--accent)}.module .num{font:700 11px 'Fira Code';color:var(--accent)}.module strong{display:block;margin-top:4px;font-size:14px}.module span{font-size:11px;color:var(--muted)}.section{margin-top:22px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:12px}.section-title h2{margin:0;font-size:1.2rem}.section-title p{margin:0;color:var(--muted);font-size:12px}.note{border-top:1px solid var(--border);padding:18px 0}.note:first-child{border-top:0}.note h3{font-size:1rem;margin:0 0 8px}.note p,.note li{font-size:14px}.note ul{padding-left:21px}.callout{background:var(--warmbg);border-left:3px solid var(--warm);padding:12px 14px;border-radius:0 12px 12px 0;margin:13px 0;font-size:13px}.codebox{background:var(--code);color:#DEE3EA;border-radius:14px;overflow:auto;margin:13px 0}.codebox .label{padding:8px 12px;border-bottom:1px solid #333A47;color:#9AA5B5;font:600 10px 'Fira Code';text-transform:uppercase}.codebox pre{padding:14px;margin:0;font-size:12px;line-height:1.7}.tag{display:inline-flex;align-items:center;border-radius:999px;background:var(--soft);color:var(--accent);padding:2px 8px;font:600 11px 'Fira Code'}.practice-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:15px}.seg{display:flex;gap:5px;background:var(--subtle);padding:4px;border-radius:13px}.seg button{border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:9px;font-size:12px;font-weight:700}.seg button.active{background:var(--surface);color:var(--accent);box-shadow:0 1px 5px rgba(0,0,0,.06)}.fc{min-height:320px;display:flex;align-items:center;justify-content:center;text-align:center}.fc-inner{max-width:720px;width:100%}.fc-q{font-size:clamp(1.15rem,3vw,1.65rem);font-weight:700;margin:18px 0}.fc-a{background:var(--subtle);padding:16px;border-radius:15px;text-align:left;font-size:14px}.actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:15px}.btn{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:9px 13px;border-radius:11px;font-size:12px;font-weight:700}.btn.primary{background:var(--accent);border-color:var(--accent);color:white}.btn.warm{background:var(--warmbg);border-color:color-mix(in srgb,var(--warm) 25%,var(--border));color:var(--warm)}.mcq-option{width:100%;display:grid;grid-template-columns:34px 1fr;gap:10px;text-align:left;align-items:center;border:1px solid var(--border);background:var(--surface);padding:13px;border-radius:14px;margin:8px 0;color:var(--text)}.mcq-option:hover{border-color:var(--accent)}.choice{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--subtle);font:700 12px 'Fira Code'}.correct{background:#d9f3e6!important;border-color:#79c9a7!important;color:#245c4b}.wrong{background:#f9dfdf!important;border-color:#e5a1a1!important;color:#7d3434}.explain{margin-top:12px;background:var(--soft);padding:13px;border-radius:13px;font-size:13px}.progress{height:7px;background:var(--subtle);border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent)}.scenario{border-top:1px solid var(--border);padding:18px 0}.scenario:first-child{border-top:0}.scenario h3{font-size:15px;margin:0 0 7px}.scenario .prompt{font-size:13px;color:var(--muted)}.hidden{display:none!important}.search{width:100%;border:1px solid var(--border);background:var(--surface);padding:11px 13px;border-radius:12px;color:var(--text)}.diag-table{width:100%;border-collapse:collapse;font-size:12px}.diag-table th,.diag-table td{border-bottom:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}.diag-table th{font-size:10px;text-transform:uppercase;color:var(--muted)}.settings{position:fixed;right:16px;top:60px;z-index:80;width:250px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px;box-shadow:0 15px 45px rgba(0,0,0,.15)}.settings label{display:block;font-size:11px;color:var(--muted);margin:10px 0 5px}.settings select{width:100%;padding:9px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text)}.footer{color:var(--muted);font-size:11px;text-align:center;padding:35px 0}@media(max-width:640px){.wrap{padding:0 12px}.hero{padding-top:30px}.module-grid{grid-template-columns:1fr}.card{padding:15px}.header-inner{min-height:60px}.brand small{display:none}.diag-wrap{overflow:auto}.diag-table{min-width:650px}}
+</style>
+</head>
+<body>
+<header class="header"><div class="wrap header-inner">
+  <div class="brand"><div class="brand-mark">CO</div><div><strong>COBOL Mastery</strong><small>Mainframe study & revision</small></div></div>
+  <div class="controls"><button class="iconbtn" id="searchBtn" aria-label="Search">⌕</button><button class="iconbtn" id="settingsBtn" aria-label="Settings">⚙</button></div>
+</div></header>
+<div id="settings" class="settings hidden">
+  <strong style="font-size:13px">Reading settings</strong>
+  <label>Theme</label><select id="theme"><option value="sage">Sage</option><option value="sepia">Sepia</option><option value="nord">Nord</option></select>
+  <label>Font</label><select id="font"><option value="sans">Sans</option><option value="serif">Serif</option><option value="lexend">Lexend</option></select>
+</div>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">COBOL / z/OS / Enterprise Batch</div><h1>Learn COBOL the way you work on a mainframe.</h1><p>A structured, senior-oriented revision app covering COBOL syntax, data division, files, tables, control flow, subprograms, DB2, CICS, compiler behavior, runtime failures and production debugging.</p></section>
+<div id="searchBox" class="hidden" style="margin-bottom:12px"><input id="search" class="search" placeholder="Search notes, flashcards, MCQs, scenarios or diagnostics…"></div>
+<nav class="tabs" aria-label="Study sections">
+<button class="tab active" data-tab="notes">Notes</button><button class="tab" data-tab="practice">Practice</button><button class="tab" data-tab="scenarios">Production Scenarios</button><button class="tab" data-tab="diagnostics">Diagnostics</button>
+</nav>
+
+<section id="notes" class="page">
+<div class="card"><div class="section-title"><div><h2>COBOL curriculum</h2><p>Core modules 1–4 · Advanced modules 5–12</p></div></div><div class="module-grid" id="moduleGrid"></div></div>
+<div id="notesContent" class="stream"></div>
+</section>
+
+<section id="practice" class="page hidden">
+<div class="card">
+<div class="practice-bar"><div><strong>Practice</strong><div style="font-size:11px;color:var(--muted)">45 flashcards + 60 verified MCQs</div></div><div class="seg"><button id="fcMode" class="active">Flashcards</button><button id="mcqMode">MCQ</button></div></div>
+<div id="flashcards"></div><div id="mcqs" class="hidden"></div>
+</div>
+</section>
+
+<section id="scenarios" class="page hidden">
+<div class="card"><div class="section-title"><div><h2>Production scenarios</h2><p>Think like the developer supporting a live COBOL estate.</p></div></div><input id="scenarioSearch" class="search" placeholder="Filter production scenarios…"><div id="scenarioList"></div></div>
+</section>
+
+<section id="diagnostics" class="page hidden">
+<div class="card"><div class="section-title"><div><h2>Diagnostics & runtime matrix</h2><p>Common compile, runtime, file, DB2 and CICS failures.</p></div></div><input id="diagSearch" class="search" placeholder="Search code, cause or fix…"><div class="diag-wrap" style="margin-top:12px"><table class="diag-table"><thead><tr><th>Code</th><th>Meaning</th><th>Typical cause</th><th>First checks</th></tr></thead><tbody id="diagBody"></tbody></table></div></div>
+</section>
+<div class="footer">COBOL Mastery · built as a companion to the JCL study app · static GitHub Pages compatible</div>
+</main>
+
+<script>
+const modules = [
+{id:1,title:'COBOL foundations & program structure',level:'CORE',desc:'Divisions, paragraphs, sections, coding rules, compile model'},
+{id:2,title:'Data Division & data description',level:'CORE',desc:'PIC, USAGE, VALUE, REDEFINES, RENAMES, condition-names'},
+{id:3,title:'Procedure Division & control flow',level:'CORE',desc:'MOVE, arithmetic, IF, EVALUATE, PERFORM, scope terminators'},
+{id:4,title:'Files & sequential I/O',level:'CORE',desc:'FD, SELECT, OPEN, READ, WRITE, status codes, VSAM concepts'},
+{id:5,title:'Tables, OCCURS & indexes',level:'ADVANCED',desc:'Subscripts, indexes, SEARCH, SEARCH ALL, ODO'},
+{id:6,title:'Strings, references & intrinsic functions',level:'ADVANCED',desc:'STRING, UNSTRING, INSPECT, reference modification, functions'},
+{id:7,title:'Subprograms, linkage & parameter passing',level:'ADVANCED',desc:'CALL, USING, LINKAGE SECTION, BY REFERENCE/VALUE/CONTENT'},
+{id:8,title:'Compiler, storage & runtime behavior',level:'ADVANCED',desc:'Compile listings, AMODE/RMODE, WORKING-STORAGE, LOCAL-STORAGE'},
+{id:9,title:'DB2 embedded SQL in COBOL',level:'ADVANCED',desc:'Host variables, SQLCA, cursors, COMMIT, error handling'},
+{id:10,title:'CICS COBOL fundamentals',level:'ADVANCED',desc:'EXEC CICS, COMMAREA, channels/containers, syncpoints'},
+{id:11,title:'Production debugging & performance',level:'ADVANCED',desc:'Abends, dumps, LE, data issues, hotspots and batch tuning'},
+{id:12,title:'Senior-level COBOL patterns & modernization',level:'ADVANCED',desc:'Maintainability, copybooks, testing, interfaces, modernization'}
+];
+
+const notes = [
+{m:1,html:'<h3>1. COBOL foundations & program structure</h3><p>COBOL is a procedural business language whose source structure is deliberately verbose and highly regular. On z/OS, the source is normally compiled and linked into a load module or program object, then invoked by JCL, CICS or another caller.</p><div class="callout"><b>Senior point:</b> distinguish the COBOL source program, compiler output, link-edit/load module and the runtime environment. A source change does not affect production until the correct compile/link/deploy path completes.</div><ul><li><b>IDENTIFICATION DIVISION</b> identifies the program and can carry metadata such as PROGRAM-ID.</li><li><b>ENVIRONMENT DIVISION</b> describes external resources, especially file assignments through SELECT.</li><li><b>DATA DIVISION</b> defines file, working, local, linkage and report data.</li><li><b>PROCEDURE DIVISION</b> contains executable logic.</li><li>Paragraphs and sections provide labels and structure for PERFORM, GO TO and debugging.</li></ul><div class="codebox"><div class="label">Minimal COBOL program</div><pre>IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLOCOB.
+
+PROCEDURE DIVISION.
+    DISPLAY "HELLO MAINFRAME".
+    GOBACK.</pre></div><p>Modern COBOL style should prefer explicit scope terminators such as <code>END-IF</code>, <code>END-PERFORM</code> and <code>END-EVALUATE</code>. This reduces ambiguous nesting and makes maintenance safer.</p>'},
+{m:2,html:'<h3>2. Data Division & data description</h3><p>The Data Division defines the program’s data model. The most important concept is that the <code>PIC</code> clause describes representation and editing, while <code>USAGE</code> controls how data is stored and processed.</p><ul><li><code>PIC X(n)</code>: alphanumeric data.</li><li><code>PIC 9(n)</code>: numeric display data.</li><li><code>S9</code>: signed numeric data.</li><li><code>V</code>: implied decimal point.</li><li><code>COMP</code>/<code>BINARY</code>: binary integer representation.</li><li><code>COMP-3</code>: packed decimal; common for financial arithmetic.</li><li><code>VALUE</code>: initial value for applicable data items.</li><li><code>REDEFINES</code>: overlays another data description; it does not create independent storage.</li><li><code>88</code> level condition-name: readable boolean-like conditions associated with a parent item.</li></ul><div class="callout"><b>Classic production trap:</b> numeric validity is about the actual bytes, not merely the PIC declaration. A field defined as numeric can still contain invalid data if bad input or an incorrect MOVE corrupts its representation. That is a common route to <code>S0C7</code>.</div><div class="codebox"><div class="label">Packed decimal</div><pre>01  WS-AMOUNT       PIC S9(7)V99 COMP-3.
+01  WS-STATUS       PIC X.
+    88  WS-ACTIVE   VALUE 'A'.
+    88  WS-CLOSED   VALUE 'C'.</pre></div>'},
+{m:3,html:'<h3>3. Procedure Division & control flow</h3><p>COBOL provides explicit verbs for movement, arithmetic, decisions, iteration and procedure invocation. The maintainable pattern is structured control flow with clear scope terminators.</p><ul><li><code>MOVE</code> transfers or converts data according to COBOL rules.</li><li><code>ADD</code>, <code>SUBTRACT</code>, <code>MULTIPLY</code>, <code>DIVIDE</code>, <code>COMPUTE</code> perform arithmetic.</li><li><code>IF</code>/<code>ELSE</code> handles binary decisions.</li><li><code>EVALUATE</code> is the structured alternative for multi-way decisions.</li><li><code>PERFORM</code> invokes paragraphs/sections or performs inline loops.</li><li><code>CONTINUE</code> is a no-op; it is not equivalent to EXIT PERFORM.</li><li><code>GOBACK</code> returns from a program, while <code>STOP RUN</code> terminates the run unit.</li></ul><div class="codebox"><div class="label">Structured control flow</div><pre>EVALUATE WS-STATUS
+    WHEN 'A'
+        PERFORM PROCESS-A
+    WHEN 'C'
+        PERFORM PROCESS-C
+    WHEN OTHER
+        DISPLAY "UNKNOWN STATUS"
+END-EVALUATE.
+
+PERFORM VARYING WS-I FROM 1 BY 1
+        UNTIL WS-I &gt; 10
+    DISPLAY WS-I
+END-PERFORM.</pre></div>'},
+{m:4,html:'<h3>4. Files & sequential I/O</h3><p>COBOL file handling has two layers: the <code>SELECT</code> and <code>FD</code> describe the external file, while PROCEDURE DIVISION verbs perform OPEN/READ/WRITE/REWRITE/DELETE operations.</p><ul><li><code>FILE STATUS</code> captures a two-character status code and should be checked deliberately.</li><li>For sequential files, a normal end-of-file condition is typically handled through AT END or an appropriate file-status check.</li><li>VSAM organizations include KSDS, ESDS and RRDS. The COBOL access pattern depends on organization and access mode.</li><li>Do not assume every non-zero file status means the same thing; map the status to the operation and dataset definition.</li></ul><div class="codebox"><div class="label">Sequential read pattern</div><pre>SELECT IN-FILE ASSIGN TO INPUTDD
+    ORGANIZATION IS SEQUENTIAL
+    FILE STATUS IS WS-FS.
+
+FD  IN-FILE.
+01  IN-REC PIC X(100).
+
+OPEN INPUT IN-FILE.
+READ IN-FILE
+    AT END SET EOF-YES TO TRUE
+END-READ.
+CLOSE IN-FILE.</pre></div>'},
+{m:5,html:'<h3>5. Tables, OCCURS & indexes</h3><p><code>OCCURS</code> defines a table. A subscript is normally a numeric data item whose value identifies an occurrence; an index is an implementation-oriented table position maintained with index operations.</p><ul><li><code>SET IDX UP BY 1</code> changes an index; <code>SET IDX TO 1</code> positions it.</li><li><code>SEARCH</code> performs a sequential table search.</li><li><code>SEARCH ALL</code> performs a binary search and therefore requires a sorted table and appropriate key condition.</li><li>For <code>SEARCH ALL</code>, the table must be ordered according to the search key; otherwise the result is unreliable.</li><li>OCCURS DEPENDING ON requires care because the runtime active occurrence count is data-driven.</li></ul><div class="callout"><b>Interview-quality distinction:</b> a subscript is a numeric occurrence reference; an index is an index item associated with an OCCURS table. They are not interchangeable concepts even when both can identify a table entry.</div>'},
+{m:6,html:'<h3>6. Strings, references & intrinsic functions</h3><p>COBOL has strong built-in support for text manipulation. <code>STRING</code> concatenates fields, <code>UNSTRING</code> splits delimited text, and <code>INSPECT</code> counts/replaces/converts characters.</p><ul><li>Reference modification uses <code>identifier(start:length)</code>.</li><li><code>STRING ... DELIMITED BY</code> controls which characters are copied.</li><li><code>UNSTRING</code> can return delimiters and counts through optional receiving items.</li><li>Intrinsic functions such as <code>FUNCTION CURRENT-DATE</code>, <code>NUMVAL</code>, <code>TRIM</code>, <code>UPPER-CASE</code> and <code>INTEGER</code> reduce custom utility code.</li><li>Always reason about receiving-field size and truncation rules.</li></ul><div class="codebox"><div class="label">Reference modification</div><pre>MOVE WS-CUSTOMER-NAME(1:20)
+  TO WS-DISPLAY-NAME.</pre></div>'},
+{m:7,html:'<h3>7. Subprograms, linkage & parameter passing</h3><p>A called COBOL program receives parameters through the LINKAGE SECTION and the PROCEDURE DIVISION USING phrase. Parameter passing semantics matter when storage is shared.</p><ul><li><b>BY REFERENCE</b> allows the called program to operate on the caller’s storage. Changes can be visible to the caller.</li><li><b>BY CONTENT</b> passes a copy of the value; the called program should not be treated as modifying the caller’s original item.</li><li><b>BY VALUE</b> passes a value according to the platform/compiler calling convention and is important for interoperable interfaces.</li><li>The USING list and actual parameter list must be compatible in number, order, type and expected semantics.</li><li><code>GOBACK</code> is normally preferable to <code>STOP RUN</code> in reusable called programs.</li></ul><div class="codebox"><div class="label">Caller / callee shape</div><pre>CALL 'CALC01' USING BY REFERENCE WS-AMOUNT
+                    BY CONTENT  WS-RATE.
+
+LINKAGE SECTION.
+01  LK-AMOUNT PIC S9(7)V99 COMP-3.
+01  LK-RATE   PIC 9(3)V9 COMP-3.
+
+PROCEDURE DIVISION USING LK-AMOUNT LK-RATE.</pre></div>'},
+{m:8,html:'<h3>8. Compiler, storage & runtime behavior</h3><p>Understanding storage explains many COBOL production defects. WORKING-STORAGE normally persists for the lifetime of the run unit, while LOCAL-STORAGE is allocated per invocation of the program. LINKAGE describes externally supplied storage.</p><ul><li>Compiler listings help locate source statements, generated offsets, warnings and diagnostics.</li><li>Language Environment (LE) provides the runtime services and condition handling used by COBOL applications.</li><li>AMODE and RMODE describe addressing mode and residency constraints; they matter when diagnosing legacy load-module behavior.</li><li>Compiler options affect diagnostics, optimization, arithmetic behavior and runtime characteristics. Do not assume defaults across compiler generations.</li><li>Initialization rules matter: do not depend on accidental storage contents.</li></ul><div class="callout"><b>Production rule:</b> when a runtime defect appears after a compiler or linkage change, compare compiler options, copybook versions, load-module build inputs and LE/runtime level before blaming the business logic.</div>'},
+{m:9,html:'<h3>9. DB2 embedded SQL in COBOL</h3><p>Embedded SQL is preprocessed before COBOL compilation. SQL statements are typically enclosed in <code>EXEC SQL</code> and <code>END-EXEC</code>. Host variables connect COBOL data items to SQL values.</p><ul><li>The DB2 precompiler processes embedded SQL and produces source suitable for COBOL compilation.</li><li><code>SQLCA</code> exposes SQLCODE and diagnostic information.</li><li>SQLCODE 0 generally indicates success; +100 indicates no qualifying row/end of cursor; negative SQLCODEs indicate errors.</li><li>Use cursors for multi-row processing and explicitly manage OPEN/FETCH/CLOSE.</li><li>COMMIT/ROLLBACK controls unit-of-work boundaries; placement affects locking, restartability and recoverability.</li><li>For dynamic SQL, SQLDA and statement preparation introduce additional runtime concerns.</li></ul><div class="codebox"><div class="label">Embedded SQL pattern</div><pre>EXEC SQL
+    SELECT BALANCE
+      INTO :WS-BALANCE
+      FROM ACCOUNT
+     WHERE ACCT_ID = :WS-ACCT-ID
+END-EXEC.
+
+IF SQLCODE NOT = 0
+    PERFORM HANDLE-SQL-ERROR
+END-IF.</pre></div>'},
+{m:10,html:'<h3>10. CICS COBOL fundamentals</h3><p>CICS programs interact with the transaction manager through <code>EXEC CICS</code> commands. Unlike a simple batch program, a CICS program is part of a managed transaction and must respect CICS task and syncpoint semantics.</p><ul><li><code>EXEC CICS LINK</code> invokes another program within the CICS environment.</li><li><code>EXEC CICS XCTL</code> transfers control without returning to the invoking program.</li><li>Channels and containers provide a flexible data-passing mechanism; COMMAREA is the older common interface.</li><li>RESP/RESP2 or HANDLE CONDITION can be used for command error handling; explicit response checking is often clearer.</li><li>SYNCPOINT commits the current unit of work; failure handling must consider CICS and DB2 resources together.</li></ul><div class="callout"><b>Key distinction:</b> batch CALL, CICS LINK and CICS XCTL may all look like program-to-program invocation, but they have different runtime semantics and return/control-flow behavior.</div>'},
+{m:11,html:'<h3>11. Production debugging & performance</h3><p>Senior COBOL support is less about remembering syntax and more about building a deterministic diagnosis path. Start with the failing job/transaction, step/program, return code or abend, input data and the exact compiled load module.</p><ul><li><b>S0C7:</b> investigate invalid numeric data, corrupted packed/display fields and mismatched layouts.</li><li><b>S0C4:</b> investigate invalid storage references, bad addresses, overlay/corruption and parameter mismatches.</li><li><b>S0C1:</b> investigate invalid instruction or control-flow/load-module issues.</li><li><b>S0CB:</b> commonly associated with decimal divide errors such as division by zero.</li><li>Use CEEDUMP/LE diagnostics, system dumps, compiler listings and source maps as appropriate.</li><li>For performance, inspect DB2 access paths, excessive I/O, table scans, unnecessary CALLs, string processing and poor commit frequency.</li></ul><div class="callout"><b>Do not patch the symptom first.</b> For an S0C7, identify the field, the record layout, the source statement and why the invalid bytes entered the program. A defensive IF may hide the real interface defect.</div>'},
+{m:12,html:'<h3>12. Senior-level patterns & modernization</h3><p>Long-lived COBOL estates depend on stable interfaces, copybooks and predictable batch behavior. Modernization work should preserve business semantics while making dependencies observable and testable.</p><ul><li>Keep copybooks version-controlled and treat interface layout changes as contract changes.</li><li>Separate I/O, validation, calculation and orchestration logic where practical.</li><li>Prefer explicit scope terminators and small paragraphs/sections with clear responsibilities.</li><li>Automated regression tests should cover representative business data, boundary values, invalid data and restart paths.</li><li>When exposing COBOL logic through APIs or modern runtimes, document data layouts, numeric representations, error codes and transaction boundaries.</li><li>For rehosting, distinguish application behavior from platform dependencies such as JCL, VSAM, DB2, CICS and scheduler conventions.</li></ul><div class="callout"><b>Modernization principle:</b> first make behavior observable and repeatable; then change the runtime or interface. Otherwise migration defects and pre-existing application defects become difficult to separate.</div>'}
+];
+
+const flashcards = [
+['COBOL structure','What are the four traditional COBOL divisions?','IDENTIFICATION, ENVIRONMENT, DATA and PROCEDURE DIVISION.','Remember: identify → environment → data → procedure.'],
+['COBOL structure','What does PROGRAM-ID identify?','The name of the COBOL program; it is used to identify the program to the compiler/runtime environment.','It is the program identity, not a dataset name.'],
+['Data','PIC X vs PIC 9?','X describes alphanumeric data; 9 describes numeric display positions.','X = text, 9 = numeric.'],
+['Data','What does S9 mean?','A signed numeric data description.','S = sign.'],
+['Data','What does V mean in a PIC?','An implied decimal point; it does not occupy a separate storage position.','V = virtual decimal.'],
+['Data','What is COMP-3?','Packed-decimal representation, commonly used for exact decimal business arithmetic.','3 = packed decimal.'],
+['Data','Does REDEFINES allocate new storage?','No. It provides an alternative description of the same storage area.','Redefines = same bytes, different view.'],
+['Data','What is an 88-level item?','A condition-name associated with another data item, used to express meaningful conditions.','88 = readable state.'],
+['Control','Why prefer END-IF?','It makes the scope of an IF explicit and reduces dangling-ELSE/nesting errors.','Explicit scope prevents surprises.'],
+['Control','What is EVALUATE used for?','Structured multi-way decision logic, similar in purpose to a switch/case construct.','Evaluate = choose a path.'],
+['Control','Difference between CONTINUE and EXIT PERFORM?','CONTINUE does nothing and proceeds; EXIT PERFORM terminates the current PERFORM.','Continue stays; exit leaves.'],
+['Control','GOBACK vs STOP RUN?','GOBACK returns from the current program/run unit; STOP RUN terminates the run unit and is generally unsuitable for reusable subprograms.','Called program: GOBACK.'],
+['Files','What does FILE STATUS provide?','A two-character status value describing the result of file I/O operations.','Always check I/O status deliberately.'],
+['Files','What does AT END mean on READ?','The read reached the end condition for the file/access path.','EOF handling.'],
+['Files','What is KSDS?','VSAM Key-Sequenced Data Set, organized by a key and supporting keyed access.','Key = KSDS.'],
+['Tables','SEARCH vs SEARCH ALL?','SEARCH is sequential; SEARCH ALL is binary search and requires an appropriately ordered table.','ALL = binary, sorted.'],
+['Tables','What is a subscript?','A numeric occurrence reference used to select a table element.','Subscript points by number.'],
+['Tables','What is an index?','An index associated with an OCCURS table, manipulated with SET and usable for indexed table operations.','Index is not just another numeric field.'],
+['Strings','What does STRING do?','Combines source items into a destination item according to delimiters and rules.','STRING joins.'],
+['Strings','What does UNSTRING do?','Splits a source character string into receiving items using delimiters.','UNSTRING separates.'],
+['Strings','What is reference modification?','Selecting a substring using start position and length, e.g. NAME(1:10).','Substring without copying first.'],
+['Subprograms','What is LINKAGE SECTION for?','It describes data supplied by another program or external caller.','LINKAGE = caller-supplied storage.'],
+['Subprograms','BY REFERENCE?','The called program receives access to the caller’s storage; changes may be visible to the caller.','Shared storage semantics.'],
+['Subprograms','BY CONTENT?','The called program receives a copy of the value.','Content = copy.'],
+['Runtime','What is WORKING-STORAGE lifetime?','Normally allocated for the lifetime of the run unit/program instance according to COBOL runtime rules.','Persistent working data.'],
+['Runtime','What is LOCAL-STORAGE?','Storage allocated per invocation of a program, supporting reentrant-style local data semantics.','Local per invocation.'],
+['DB2','What does SQLCODE +100 indicate?','No qualifying row for a singleton operation or end of cursor data, depending on context.','+100 = no more/no row.'],
+['DB2','What is SQLCA?','A DB2 communication area containing SQL result and diagnostic information, including SQLCODE.','SQL status area.'],
+['DB2','Why use cursors?','To process a result set row by row when multiple rows may be returned.','Cursor = multiple-row processing.'],
+['DB2','Why does COMMIT frequency matter?','It controls unit-of-work boundaries and affects locking, log volume, restartability and throughput.','Commit is a design decision.'],
+['CICS','CICS LINK vs XCTL?','LINK calls another program and returns; XCTL transfers control without returning to the caller.','LINK returns; XCTL transfers.'],
+['CICS','What is COMMAREA?','A traditional CICS communication area used to pass data between programs/transactions.','Classic CICS interface.'],
+['CICS','What are channels/containers?','A flexible CICS data-passing mechanism that can carry named containers and avoid some COMMAREA size/layout constraints.','Named data containers.'],
+['CICS','What is SYNCPOINT?','A CICS command that establishes a syncpoint/commit boundary for the current unit of work.','Transaction boundary.'],
+['Abends','Common cause of S0C7?','Invalid numeric data used by an instruction expecting valid numeric representation.','Bad numeric bytes.'],
+['Abends','Common cause of S0C4?','Invalid storage reference, corrupted address, overlay or parameter/layout mismatch.','Bad address/storage.'],
+['Abends','What is S0CB commonly associated with?','A decimal arithmetic exception such as division by zero.','Decimal divide failure.'],
+['Debugging','First evidence for an abend?','Job/transaction identifier, failing step/program, abend/return code, dump/CEEDUMP and exact load module/source level.','Identify the exact execution artifact.'],
+['Debugging','Why compare copybooks?','A caller/callee or file layout mismatch can shift fields and cause data corruption or S0C7/S0C4.','Layout is a contract.'],
+['Modernization','Why isolate I/O from business rules?','It makes testing, migration and replacement of interfaces easier without changing core business calculations.','Separate policy from plumbing.'],
+['Modernization','What should be regression-tested?','Normal, boundary, invalid-data, restart/recovery and interface scenarios representative of production.','Test the edges, not just the happy path.'],
+['Compiler','What does the DB2 precompiler do?','Processes embedded SQL and produces source/output suitable for COBOL compilation while generating DB2-related artifacts.','SQL first, COBOL compile after.'],
+['Compiler','Why do compiler options matter?','They can change diagnostics, optimization and runtime behavior; builds should use controlled, known options.','Build configuration is part of behavior.']
+].map((x,i)=>({id:i+1,cat:x[0],q:x[1],a:x[2],hook:x[3]}));
+
+const mcqs = [
+['Which division contains executable COBOL statements?',['IDENTIFICATION DIVISION','ENVIRONMENT DIVISION','DATA DIVISION','PROCEDURE DIVISION'],3,'The PROCEDURE DIVISION contains executable logic.'],
+['Which PIC clause describes alphanumeric data?',['PIC 9(10)','PIC X(10)','PIC S9(9)','PIC COMP-3'],1,'PIC X describes alphanumeric character positions.'],
+['What does COMP-3 normally represent?',['Binary floating point','Packed decimal','EBCDIC text','A table index'],1,'COMP-3 is packed decimal representation.'],
+['What does REDEFINES do?',['Allocates a second copy','Overlays another data description on the same storage','Converts packed decimal to text','Sorts a table'],1,'REDEFINES provides an alternative description of the same storage.'],
+['What is the purpose of an 88-level condition-name?',['Allocate a file','Define a readable condition for a data item','Declare a paragraph','Start a transaction'],1,'88-levels associate meaningful conditions with a data item.'],
+['Which is the preferred structured scope terminator for IF?',['END-IF','STOP IF','CLOSE-IF','FINISH-IF'],0,'END-IF explicitly terminates an IF scope.'],
+['Which statement is best for multi-way decision logic?',['EVALUATE','OPEN','STRING','CALL'],0,'EVALUATE provides structured multi-way selection.'],
+['What does CONTINUE do?',['Ends the run unit','Exits the current PERFORM','Performs no operation and continues','Closes all files'],2,'CONTINUE is a no-op; EXIT PERFORM is used to leave a PERFORM.'],
+['Which is generally appropriate when returning from a reusable called COBOL program?',['STOP RUN','GOBACK','CANCEL ALL','END JOB'],1,'GOBACK returns from the called program without terminating the caller’s run unit.'],
+['What does FILE STATUS provide?',['Dataset allocation','A two-character I/O result/status','Compiler options','DB2 authorization'],1,'FILE STATUS reports the result of file operations.'],
+['Which VSAM organization is keyed?',['ESDS','KSDS','RRDS only','LDS only'],1,'KSDS is Key-Sequenced Data Set.'],
+['What does SEARCH ALL require?',['An unsorted table','A table appropriately ordered for the search key','A DB2 cursor','A CICS transaction'],1,'SEARCH ALL is binary search and depends on the required ordering.'],
+['Which operation manipulates a COBOL index item?',['SET','MOVE only','DISPLAY','OPEN'],0,'SET is used to establish or change index values.'],
+['What does STRING primarily do?',['Split text','Concatenate data into a receiving item','Sort a table','Compile source'],1,'STRING combines source items into a destination.'],
+['What does UNSTRING primarily do?',['Split character data into receiving items','Link a load module','Commit DB2','Open a VSAM file'],0,'UNSTRING parses a character string into receiving fields.'],
+['What syntax is reference modification?',['NAME(1:10)','NAME[1,10]','NAME<1-10>','SUBSTR(NAME,1,10)'],0,'COBOL reference modification uses identifier(start:length).'],
+['Where are caller-supplied parameters described?',['FILE SECTION','LINKAGE SECTION','REPORT SECTION','SCREEN SECTION'],1,'The LINKAGE SECTION describes externally supplied data.'],
+['What does BY REFERENCE mean?',['A value copy is always made','The called program accesses caller storage','The value is encrypted','The parameter is ignored'],1,'BY REFERENCE permits access to the caller’s storage.'],
+['What does BY CONTENT provide?',['A copy of the value','A file handle','A table index','A DB2 cursor'],0,'BY CONTENT passes a value copy.'],
+['What is a common lifetime characteristic of WORKING-STORAGE?',['Only one statement','Typically the run unit/program lifetime','Only one PERFORM iteration','Only one SQL statement'],1,'WORKING-STORAGE is generally retained for the applicable run unit/program lifetime.'],
+['What is distinctive about LOCAL-STORAGE?',['It is allocated per invocation','It is always external storage','It is a DB2 table','It is only for JCL'],0,'LOCAL-STORAGE is allocated per invocation.'],
+['Which SQLCODE generally means no row/no more cursor rows?',['0','+100','-911','-805'],1,'+100 indicates no qualifying row or end of cursor data depending on context.'],
+['What does SQLCA contain?',['Only COBOL source','SQL result/diagnostic information','JCL DD statements','VSAM keys'],1,'SQLCA includes SQLCODE and other SQL diagnostics.'],
+['Why are cursors used?',['To process multiple DB2 result rows','To compile COBOL','To allocate datasets','To invoke CICS'],0,'Cursors support multi-row result processing.'],
+['What can excessive DB2 commit frequency cause?',['Only syntax errors','Additional overhead and changed locking/log behavior','A compiler abend','A PIC mismatch'],1,'Commit frequency affects overhead, locks, logging and restartability.'],
+['CICS LINK normally does what?',['Transfers without return','Calls another program and permits return','Compiles a program','Ends CICS'],1,'LINK is an invocation that can return to the caller.'],
+['CICS XCTL normally does what?',['Returns immediately to caller','Transfers control without returning to the invoking program','Opens a VSAM file','Runs JCL'],1,'XCTL transfers control without a return to the caller.'],
+['Which is a traditional CICS data-passing mechanism?',['COMMAREA','SYSOUT','STEPLIB','SYSPRINT'],0,'COMMAREA is a traditional CICS communication area.'],
+['What does SYNCPOINT establish?',['A compiler listing','A transaction/unit-of-work synchronization boundary','A table index','A COBOL paragraph'],1,'SYNCPOINT establishes a CICS syncpoint and associated commit boundary.'],
+['S0C7 most strongly suggests what?',['Invalid numeric data','Missing JCL DD only','CICS program not found','Successful completion'],0,'S0C7 is commonly caused by invalid numeric data.'],
+['S0C4 most strongly suggests what?',['Invalid storage/reference','Normal EOF','DB2 +100','Successful CALL'],0,'S0C4 commonly indicates an invalid storage reference or related corruption.'],
+['S0CB is commonly associated with what?',['Decimal divide exception','Missing copybook','Normal file close','CICS LINK'],0,'S0CB is commonly associated with decimal arithmetic exceptions such as divide by zero.'],
+['What is a strong first step after a production abend?',['Change random code','Identify exact failing step/program and gather dump/runtime evidence','Delete the input file','Restart repeatedly without evidence'],1,'Diagnosis starts with precise execution evidence.'],
+['Why can a copybook mismatch cause runtime failures?',['It changes the weather','It can shift field boundaries and corrupt interpretation of bytes','It always changes JCL','It disables CICS'],1,'Incompatible layouts can make the same bytes mean different fields.'],
+['What does the DB2 precompiler process?',['Embedded SQL','Only JCL','Only VSAM','Only CICS maps'],0,'The precompiler processes embedded SQL before the COBOL compile stage.'],
+['Which statement is correct about host variables?',['They connect COBOL data items to SQL values','They are JCL symbols','They are CICS transactions','They are load modules'],0,'Host variables bridge COBOL data and SQL statements.'],
+['Which is safest for a multi-row SELECT?',['Assume one row always exists','Use a cursor when multiple rows are expected','Use DISPLAY','Use STOP RUN'],1,'A cursor is the standard pattern for multi-row processing.'],
+['What does GOBACK avoid in a called program?',['Returning to caller','Unnecessarily terminating the broader run unit','Using DATA DIVISION','Using parameters'],1,'STOP RUN can terminate the run unit; GOBACK returns control.'],
+['Which data type is commonly used for exact financial decimal arithmetic?',['COMP-3','PIC X only','Floating text','Index item'],0,'Packed decimal is common for exact business arithmetic.'],
+['What does an implied decimal V do?',['Consumes a separate byte','Defines decimal position without separate storage','Creates a file','Creates an index'],1,'V marks an implied decimal position.'],
+['Which statement about REDEFINES is true?',['It always allocates new storage','It overlays existing storage with another description','It sorts data','It performs arithmetic'],1,'REDEFINES overlays the same storage.'],
+['Which is true about SEARCH ALL?',['It is sequential','It is binary and needs the table ordered appropriately','It ignores the key','It requires DB2'],1,'SEARCH ALL is binary search and depends on ordering.'],
+['Which is a good reason to use explicit scope terminators?',['They increase ambiguity','They improve readability and reduce nesting errors','They replace all paragraphs','They disable compiler checks'],1,'Explicit terminators make boundaries clear.'],
+['What is the purpose of FILE STATUS checks?',['To detect I/O outcomes explicitly','To compile source','To create SQL tables','To change PIC clauses'],0,'Status checks let programs handle expected and unexpected I/O results.'],
+['Which action is most likely to help diagnose S0C7?',['Inspect the invalid field and its actual bytes/layout','Change the program name','Delete all copybooks','Disable DB2'],0,'S0C7 analysis requires identifying the bad numeric representation and why it occurred.'],
+['Which action is most likely to help diagnose S0C4?',['Inspect addresses, parameter layouts and possible storage overlays','Change DISPLAY text only','Increase SQL commit frequency','Rename the paragraph'],0,'S0C4 investigation centers on invalid storage references and corruption.'],
+['Why should copybooks be version-controlled?',['They are cosmetic','They define data/interface contracts','They replace the compiler','They are only for comments'],1,'Copybooks often define binary/text layouts shared across programs.'],
+['Which practice best supports modernization?',['Change runtime and business logic simultaneously without tests','Separate interfaces/I/O from core business logic and build regression coverage','Remove all diagnostics','Avoid version control'],1,'Separation and regression tests reduce migration risk.'],
+['Which is true about WORKING-STORAGE initialization?',['Never depend on accidental contents','It is always random by specification','It is always zero in every circumstance','It cannot have VALUE clauses'],0,'Initialization must be explicit where correctness depends on it.'],
+['What is the primary role of ENVIRONMENT DIVISION file SELECT?',['Associate logical COBOL file names with external resources','Perform arithmetic','Define SQLCODE','Declare a CICS transaction'],0,'SELECT defines the file and its external assignment/organization characteristics.'],
+['Which verb reads a COBOL file record?',['READ','FETCH','GETLINE','SCAN'],0,'READ performs COBOL file input.'],
+['Which verb writes a record?',['WRITE','PUTSQL','INSERT-RECORD','OUTPUT'],0,'WRITE outputs a record to a COBOL file.'],
+['Which operation is associated with an already existing record in many indexed file designs?',['REWRITE','COMPILE','EVALUATE','SEARCH ALL'],0,'REWRITE updates an existing record in file organizations that support it.'],
+['What is a key reason to inspect the exact load module during an incident?',['Source may differ from the executable actually running','It changes SQLCODE','It changes PIC syntax','It removes the need for dumps'],0,'Production may be executing a different build than the source currently viewed.'],
+['What does CEEDUMP provide in LE environments?',['Runtime diagnostic information','A new JCL job card','A DB2 table','A copybook'],0,'CEEDUMP is a Language Environment diagnostic artifact.'],
+['Which performance issue can excessive row-by-row DB2 processing cause?',['Higher SQL call overhead','Guaranteed S0C7','Automatic CICS XCTL','No effect'],0,'Many individual SQL calls can add substantial overhead.'],
+['Why does COMMIT placement matter for batch restartability?',['It defines useful unit-of-work boundaries','It changes PIC clauses','It removes all locks permanently','It compiles source'],0,'Commit boundaries affect what work is durable and what must be repeated after failure.'],
+['Which statement about BY REFERENCE is most important for a senior developer?',['The callee may change caller-visible storage','It always copies data','It always serializes data','It is only for DB2'],0,'Shared storage semantics make interface contracts critical.'],
+['What should a regression suite include beyond happy-path data?',['Boundary, invalid-data, restart and interface cases','Only one input','Only syntax tests','No production-like data'],0,'Enterprise regression must cover failure and boundary behavior.']
+].map((x,i)=>({id:i+1,q:x[0],opts:x[1],ans:x[2],exp:x[3]}));
+
+const scenarios = [
+['S0C7 after a copybook change','A nightly account batch begins failing with S0C7 immediately after a shared copybook was updated.','Compare the compiled layout used by the failing program and upstream producer. Inspect the field at the failing offset, actual bytes, PIC/USAGE definitions and the deployed load module. Do not merely add NUMVAL or an IF around the field.'],
+['S0C4 in a called module','A caller invokes a COBOL subprogram and the callee abends S0C4 after an interface release.','Check CALL USING order, number and sizes, BY REFERENCE/BY CONTENT semantics, LINKAGE definitions and copybook versions. A layout mismatch can make a valid address look invalid to the callee.'],
+['SEARCH ALL returns the wrong record','A table lookup intermittently returns incorrect customer data after a new load process was introduced.','Verify that the table is sorted according to the SEARCH ALL key and that the OCCURS/key definitions match the comparison condition. If ordering is not guaranteed, use SEARCH or sort the table first.'],
+['DB2 +100 treated as an error','A batch cursor reports +100 and the program abends instead of completing normally.','For cursor FETCH, +100 normally indicates end of data. Handle it as the loop termination condition, while still handling negative SQLCODEs as errors.'],
+['DB2 deadlock after commit change','A batch program becomes slower and starts seeing locking failures after commit logic was changed.','Review transaction boundaries, rows touched per unit of work, index access paths, lock duration and concurrent jobs. Commit frequency is a concurrency/restartability design decision, not just a performance switch.'],
+['CICS LINK versus XCTL defect','A CICS flow no longer returns to the original program after a routing change.','Check whether LINK was replaced by XCTL. LINK returns to the caller; XCTL transfers control without returning. Verify intended control flow and transaction state.'],
+['Bad file status hidden by AT END','A sequential read loop stops early, but no abend occurs.','Inspect FILE STATUS after OPEN/READ and verify the program is not treating every non-zero status as EOF. Distinguish normal end-of-file from allocation, authorization, record-format or I/O errors.'],
+['Numeric corruption from text input','An input field defined as packed decimal causes S0C7 after an upstream interface change.','Inspect the raw record and layout. Verify field position, length, sign/packed-decimal representation and producer contract. The first question is why invalid bytes entered the numeric field.'],
+['Called program terminates batch','A reusable subprogram executes STOP RUN and the caller unexpectedly ends.','Replace termination semantics with GOBACK where appropriate and confirm the program’s intended call/run-unit contract. STOP RUN is not a neutral return from a subprogram.'],
+['Modernization regression','A rehosted COBOL workload produces different totals despite identical business input.','Compare compiler options, numeric representations, file organization/access semantics, sort order, date handling, DB2 isolation/commit behavior and deployed copybooks. Establish a golden regression case before changing logic.']
+];
+
+const diagnostics = [
+['S0C1','Operation exception','Invalid instruction/control-flow or load-module issue; corrupted execution path can also contribute.','Check failing program/offset, load module, compile/link artifacts and dump.'],
+['S0C4','Protection/addressing exception','Invalid storage reference, bad pointer/address, overlay or parameter mismatch.','Check offset, LINKAGE/CALL USING, storage layouts and dump.'],
+['S0C5','Addressing exception','Invalid address or control-flow-related storage reference.','Inspect dump, pointer/reference usage and caller/callee contract.'],
+['S0C7','Data exception','Invalid numeric data used where valid numeric representation is required.','Inspect failing field bytes, PIC/USAGE, copybooks and input record.'],
+['S0CB','Decimal arithmetic exception','Commonly associated with decimal divide errors such as divide by zero.','Check divisor and arithmetic statement at failing offset.'],
+['S0CC','Decimal floating exception','Decimal floating-point arithmetic exception in applicable environments.','Inspect arithmetic operands and compiler/runtime context.'],
+['S0C9','Decimal divide exception','Arithmetic exception associated with decimal operations.','Check divide operands and generated statement.'],
+['S322','CPU/time limit','Program exceeded an execution-time/CPU limit imposed by the environment.','Check loops, I/O, DB2 access, sort volume and recent data growth.'],
+['SB37','End-of-volume/space condition','Output dataset exhausted allocated space/volumes.','Review allocation, record growth and dataset management.'],
+['SD37','Dataset space condition','Insufficient allocated primary/secondary space.','Check allocation and expected output volume.'],
+['SE37','Dataset space/extent condition','Dataset could not extend as required.','Check allocation, extents/volume constraints and output growth.'],
+['S806','Load module/program unavailable','Requested executable could not be located/loaded.','Check STEPLIB/JOBLIB, load library, member name and deployment.'],
+['S878','Virtual storage shortage','Insufficient virtual storage for the request.','Review region/storage settings, allocation, memory-heavy tables and runtime behavior.'],
+['IGYPS2121','COBOL compiler diagnostic','Compiler detected a syntax/semantic issue during compilation.','Use listing/source line and compiler message context; fix source then rebuild.'],
+['IGYCRCTL','COBOL compiler phase','Compiler-related diagnostic identifier; exact message suffix/context matters.','Read the complete compiler message and options/listing; do not diagnose from prefix alone.'],
+['SQLCODE +100','No data','No qualifying row or end of cursor result set, depending on statement.','Handle as expected condition where appropriate.'],
+['SQLCODE -911','Rollback/deadlock/timeout condition','DB2 rolled back or failed due to deadlock/timeout depending on reason code.','Check SQLERRMC/reason code, contention and transaction boundaries.'],
+['SQLCODE -805','Package not found/inconsistent','DB2 package/collection mismatch or package unavailable for the application.','Check DBRM/package bind, collection, plan/package naming and deployment.'],
+['SQLCODE -818','Timestamp mismatch','Load module and DBRM/package were built from inconsistent source timestamps.','Re-precompile/compile/link/bind consistently and verify build artifacts.'],
+['AEY9','CICS/DB2 environment error','CICS command or resource condition; exact message context is required.','Inspect CICS messages, RESP/RESP2 and transaction/resource definitions.'],
+['ASRA','CICS program abend','Program check/LE condition in a CICS transaction.','Review CICS dump, failing statement/offset and LE diagnostics.'],
+['AKEA','CICS transaction/resource condition','CICS transaction/resource failure; exact context is required.','Use CICS messages, dump and resource definitions.'],
+['CEE3207S','LE condition','Language Environment runtime condition; message text identifies the specific condition.','Read complete CEExxxx message and traceback/CEEDUMP.'],
+['CEE3DMP','LE diagnostic dump','Runtime diagnostic dump generated by LE.','Use traceback, offsets and storage/condition information to locate the failure.'],
+['U4038','LE/user abend pattern','User/application termination surfaced through LE; exact cause depends on message/context.','Inspect LE messages and application logic around termination.']
+];
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+let currentModule=1, fcIndex=0, flipped=false, mcqIndex=0, mcqAnswered=false, score=0;
+
+function renderModules(){
+ const g=document.getElementById('moduleGrid');
+ g.innerHTML=modules.map(function(m){return '<button class="module" data-module="'+m.id+'"><span class="num">'+String(m.id).padStart(2,'0')+' · '+m.level+'</span><strong>'+esc(m.title)+'</strong><span>'+esc(m.desc)+'</span></button>'}).join('');
+ g.querySelectorAll('.module').forEach(function(b){b.onclick=function(){currentModule=Number(b.dataset.module);renderNotes()}})
+}
+function renderNotes(){
+ const n=notes.find(function(x){return x.m===currentModule});
+ const head='<div class="section-title" style="margin-top:24px"><div><h2>Module '+currentModule+' · '+modules[currentModule-1].title+'</h2><p>'+modules[currentModule-1].level+' · senior missing notes included</p></div></div>';
+ document.getElementById('notesContent').innerHTML=head+'<div class="card">'+n.html+'<details class="callout"><summary style="cursor:pointer;font-weight:700">Senior Missing Notes</summary><div style="margin-top:8px"><ul><li>Validate the exact deployed artifact, not only current source.</li><li>Check interface contracts before changing business logic.</li><li>Use explicit error/status handling instead of assuming the happy path.</li><li>For production diagnosis, preserve evidence: input, offset, dump, compile listing and build versions.</li></ul></div></details></div>';
+ window.scrollTo({top:document.getElementById('notesContent').offsetTop-85,behavior:'smooth'});
+}
+function renderFC(){
+ const c=flashcards[fcIndex];
+ const box=document.getElementById('flashcards');
+ box.innerHTML='<div class="fc"><div class="fc-inner"><div><span class="tag">'+esc(c.cat)+'</span> <span style="font-size:11px;color:var(--muted)">Card '+(fcIndex+1)+' of '+flashcards.length+'</span></div><div class="fc-q">'+esc(c.q)+'</div>'+(flipped?'<div class="fc-a"><b>Answer</b><br>'+esc(c.a)+'<div style="margin-top:10px;color:var(--warm)"><b>Memory hook:</b> '+esc(c.hook)+'</div></div>':'<div style="color:var(--muted);font-size:13px">Tap Reveal to test recall before seeing the answer.</div>')+'</div></div><div class="actions"><button class="btn" id="prevFC">← Previous</button><button class="btn primary" id="flipFC">'+(flipped?'Hide answer':'Reveal answer')+'</button><button class="btn" id="nextFC">Next →</button></div><div class="actions"><button class="btn warm" id="againFC">Needs review</button><button class="btn" id="masterFC">Mastered</button></div>';
+ document.getElementById('flipFC').onclick=function(){flipped=!flipped;renderFC()};document.getElementById('prevFC').onclick=function(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;flipped=false;renderFC()};document.getElementById('nextFC').onclick=function(){fcIndex=(fcIndex+1)%flashcards.length;flipped=false;renderFC()};document.getElementById('againFC').onclick=function(){fcIndex=(fcIndex+1)%flashcards.length;flipped=false;renderFC()};document.getElementById('masterFC').onclick=function(){fcIndex=(fcIndex+1)%flashcards.length;flipped=false;renderFC()};
+}
+function renderMCQ(){
+ const q=mcqs[mcqIndex], box=document.getElementById('mcqs');
+ box.innerHTML='<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Question '+(mcqIndex+1)+' of '+mcqs.length+'</span><span>Score '+score+'</span></div><div class="progress" style="margin-top:6px"><i style="width:'+(((mcqIndex+1)/mcqs.length)*100)+'%"></i></div></div><div class="card" style="padding:17px"><h3 style="font-size:16px;margin:0 0 12px">'+esc(q.q)+'</h3><div id="opts">'+q.opts.map(function(o,i){return '<button class="mcq-option" data-i="'+i+'"><span class="choice">'+String.fromCharCode(65+i)+'</span><span>'+esc(o)+'</span></button>'}).join('')+'</div><div id="explain" class="explain hidden"></div><div class="actions"><button class="btn primary" id="nextMCQ" disabled>Next question →</button></div></div>';
+ document.querySelectorAll('.mcq-option').forEach(function(b){b.onclick=function(){if(mcqAnswered)return;mcqAnswered=true;const i=Number(b.dataset.i);document.querySelectorAll('.mcq-option').forEach(function(x){x.disabled=true});if(i===q.ans){b.classList.add('correct');score++}else{b.classList.add('wrong');document.querySelector('.mcq-option[data-i="'+q.ans+'"]').classList.add('correct')}const e=document.getElementById('explain');e.classList.remove('hidden');e.innerHTML='<b>Explanation:</b> '+esc(q.exp);document.getElementById('nextMCQ').disabled=false}}});
+ document.getElementById('nextMCQ').onclick=function(){mcqIndex=(mcqIndex+1)%mcqs.length;mcqAnswered=false;renderMCQ()};
+}
+function renderScenarios(filter){
+ const q=(filter||'').toLowerCase();document.getElementById('scenarioList').innerHTML=scenarios.filter(function(s){return s.join(' ').toLowerCase().includes(q)}).map(function(s,i){return '<article class="scenario"><span class="tag">CASE '+(i+1)+'</span><h3>'+esc(s[0])+'</h3><div class="prompt">'+esc(s[1])+'</div><details style="margin-top:10px"><summary class="btn">Reveal diagnosis path</summary><div class="callout" style="margin-top:10px">'+esc(s[2])+'</div></details></article>'}).join('')||'<p style="color:var(--muted)">No scenarios match.</p>';
+}
+function renderDiag(filter){
+ const q=(filter||'').toLowerCase();document.getElementById('diagBody').innerHTML=diagnostics.filter(function(d){return d.join(' ').toLowerCase().includes(q)}).map(function(d){return '<tr><td><code>'+esc(d[0])+'</code></td><td><b>'+esc(d[1])+'</b></td><td>'+esc(d[2])+'</td><td>'+esc(d[3])+'</td></tr>'}).join('');
+}
+function tab(name){
+ document.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('active',x.dataset.tab===name)});
+ document.querySelectorAll('.page').forEach(function(x){x.classList.toggle('hidden',x.id!==name)});
+}
+document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){tab(b.dataset.tab)}});
+document.getElementById('fcMode').onclick=function(){this.classList.add('active');document.getElementById('mcqMode').classList.remove('active');document.getElementById('flashcards').classList.remove('hidden');document.getElementById('mcqs').classList.add('hidden')};
+document.getElementById('mcqMode').onclick=function(){this.classList.add('active');document.getElementById('fcMode').classList.remove('active');document.getElementById('flashcards').classList.add('hidden');document.getElementById('mcqs').classList.remove('hidden');renderMCQ()};
+document.getElementById('scenarioSearch').oninput=function(){renderScenarios(this.value)};
+document.getElementById('diagSearch').oninput=function(){renderDiag(this.value)};
+document.getElementById('searchBtn').onclick=function(){document.getElementById('searchBox').classList.toggle('hidden');document.getElementById('search').focus()};
+document.getElementById('settingsBtn').onclick=function(){document.getElementById('settings').classList.toggle('hidden')};
+document.getElementById('theme').onchange=function(){document.documentElement.dataset.theme=this.value;localStorage.setItem('cobol-theme',this.value)};
+document.getElementById('font').onchange=function(){document.documentElement.dataset.font=this.value;localStorage.setItem('cobol-font',this.value)};
+document.getElementById('search').oninput=function(){const q=this.value.toLowerCase();document.querySelectorAll('.module').forEach(function(b){b.classList.toggle('hidden',!b.textContent.toLowerCase().includes(q))})};
+const savedTheme=localStorage.getItem('cobol-theme');const savedFont=localStorage.getItem('cobol-font');if(savedTheme){document.documentElement.dataset.theme=savedTheme;document.getElementById('theme').value=savedTheme}if(savedFont){document.documentElement.dataset.font=savedFont;document.getElementById('font').value=savedFont}
+renderModules();renderNotes();renderFC();renderMCQ();renderScenarios('');renderDiag('');
+</script>
+</body></html>
