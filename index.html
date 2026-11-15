@@ -2424,11 +2424,15 @@
       const isMcq=mode==='mcq';
       if(flash)flash.classList.toggle('hidden',isMcq);
       if(mcq)mcq.classList.toggle('hidden',!isMcq);
+      if(mcq)mcq.setAttribute('aria-hidden',String(!isMcq));
+      if(flash)flash.setAttribute('aria-hidden',String(isMcq));
       if(fb){fb.classList.toggle('active',!isMcq);fb.setAttribute('aria-pressed',String(!isMcq));}
       if(mb){mb.classList.toggle('active',isMcq);mb.setAttribute('aria-pressed',String(isMcq));}
-      if(isMcq && typeof window.renderMcq==='function') window.setPracticeMode('flashcard');
-      renderMcq();
-      if(!isMcq && typeof window.renderFlashcard==='function') window.renderFlashcard();
+      if(isMcq){
+        if(typeof window.renderMcq==='function') window.renderMcq();
+      }else{
+        if(typeof renderCurrentFlashcard==='function') renderCurrentFlashcard();
+      }
     };
 
     window.renderMcq = function renderMcq(){
@@ -2452,7 +2456,7 @@
       q.options.forEach((option,i)=>{
         const b=document.createElement('button');
         b.type='button';
-        b.className='mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed';
+        b.className='mcq-option w-full text-left p-3 rounded-xl border border-paper-border dark:border-terminal-border bg-paper-subtle dark:bg-slate-800/70 hover:border-blue-400 transition cursor-pointer text-sm leading-relaxed'; b.setAttribute('aria-pressed','false');
         const label=document.createElement('span');
         label.className='mcq-choice-label inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper-surface dark:bg-slate-700 border border-paper-border dark:border-terminal-border mr-2 text-xs font-bold';
         label.textContent=String.fromCharCode(65+i);
@@ -3108,7 +3112,7 @@
 
       // Dynamic modules are rendered on entry as well as initial load.
       // This prevents stale/empty panels after navigation or restored browser state.
-      if (tabId === 'flashcards') { updateSrsSummary(); applyFlashcardFilters(); window.renderMcq?.(); requestAnimationFrame(()=>window.renderMcq?.()); setTimeout(()=>window.renderMcq?.(),50); }
+      if (tabId === 'flashcards') { updateSrsSummary(); applyFlashcardFilters(); requestAnimationFrame(()=>{ const active=document.getElementById('practiceModeMcq')?.getAttribute('aria-pressed')==='true'; setPracticeMode(active?'mcq':'flashcard'); }); }
       if (tabId === 'scenarios') renderScenarios('');
       if (tabId === 'lab') {
         renderAbendTable(document.getElementById('abendFilterInput')?.value || '');
@@ -3698,6 +3702,7 @@
       currentFcCategory = 'ALL';
       currentFcStatus = 'ALL_STATUS';
       filterFlashcards('ALL');
+      setPracticeMode('flashcard');
       // Explicit first-paint initialization: both the SRS card and MCQ must be
       // rendered after the DOM and data repositories are fully initialized.
       applyFlashcardFilters();
