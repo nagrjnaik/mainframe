@@ -1,0 +1,20 @@
+{
+  "name": "COBOL Mastery",
+  "short_name": "COBOL",
+  "id": "./cobol.html",
+  "description": "Professional COBOL interview revision and mainframe study notes.",
+  "start_url": "./cobol.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F5F0",
+  "theme_color": "#3B6E5C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
